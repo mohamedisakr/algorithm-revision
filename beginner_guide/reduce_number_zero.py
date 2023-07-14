@@ -1,4 +1,6 @@
 def numberOfSteps(num: int) -> int:
+    # Time:   O(log(n))
+    # Memory: O(1)
     steps = 0
 
     while num != 0:
@@ -14,17 +16,30 @@ def numberOfSteps(num: int) -> int:
 
     return steps
 
+
+'''
+def numberOfSteps(num: int) -> int:
+    # Time:   O(1)
+    # Memory: O(1)
     # if num == 0:
     #     return 0
     # return num.bit_length() - 1 + num.bit_count()
+'''
 
-    # steps = 0
-    # while num != 0:
-    #     steps += 1
-    #     if num % 2 == 0:
-    #         num //= 2
-    #     else:
-    #         num -= 1
-    #         steps += 1
+'''
+    # ------- my solution -------
+def numberOfSteps(num: int) -> int:    
+    # Time:   O(n)
+    # Memory: O(n)
 
-    # return steps
+    steps = 0
+    while num != 0:
+        steps += 1
+        if num % 2 == 0:
+            num //= 2
+        else:
+            num -= 1
+            steps += 1
+
+    return steps
+'''
