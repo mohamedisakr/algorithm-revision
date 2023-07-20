@@ -2,7 +2,7 @@ from ctypes import py_object
 
 
 class Array:
-    def __init__(self, size):
+    def __init__(self, size=0):
         # current position
         # self.pos = 0
 
@@ -70,7 +70,7 @@ class Array:
 
 
 if __name__ == '__main__':
-    array = Array(0)
+    array = Array()
 
     array.append(56)
     array.append('hello')
