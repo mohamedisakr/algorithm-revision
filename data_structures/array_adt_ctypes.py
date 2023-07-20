@@ -3,6 +3,9 @@ from ctypes import py_object
 
 class Array:
     def __init__(self, size):
+        # current position
+        # self.pos = 0
+
         # FIXED size array from C language
         self.growth_factor = 2
         self.max_size = 16
@@ -26,11 +29,14 @@ class Array:
         self.memory[index] = value
 
     def __str__(self) -> str:
-        return self.memory
+        result = ''
+        for i in range(self.size):
+            result += str(self.memory[i]) + ', '
+        return result
 
     def expand_capacity(self):
         self._capacity *= self.growth_factor
-        array_data_type = py_object * (self._capacity)
+        array_data_type = py_object * self._capacity
         new_memory = array_data_type()
 
         for i in range(self.size):
@@ -39,57 +45,41 @@ class Array:
         del self.memory
         self.memory = new_memory
 
-    def append(self, value):
+    def append(self, item):
         if self.size == self._capacity:
             self.expand_capacity()
-        # # double original array size # (self.size + 1)
-        # array_data_type = py_object * (self.size * self.growth_factor)
-        # new_memory = array_data_type()
 
-        # # copy items from original array to double size array
-        # for i in range(self.size):
-        #     new_memory[i] = self.memory[i]
-
-        # add new item
-        self.memory[self.size] = value
+        self.memory[self.size] = item
 
         # increment capacity
         self.size += 1
 
-        # # delete old array
-        # del self.memory
+    def insert(self, index, value):
+        assert 0 <= index < self.size
 
-        # # reset old array to point to new array
-        # self.memory = new_memory
+        if self.size == self._capacity:
+            self.expand_capacity()
+
+        # shift all items 1 unit to the right
+        # shift from the end of array
+        for i in range(self.size-1, index-1, -1):
+            self.memory[i+1] = self.memory[i]
+
+        self.memory[index] = value
+        self.size += 1
 
 
 if __name__ == '__main__':
-    # array = Array(6)    # fixed array
-    # print(f'array size : {len(array)}')
+    array = Array(0)
 
-    # for i in range(array.size):  # set
-    #     array.memory[i] = i+1
+    array.append(56)
+    array.append('hello')
+    array.insert(0, 'A0')
 
-    # # for i in range(array.size):  # get
-    # #     print(array.memory[i])
+    print(array)
 
-    # # del array.memory[0] # NOT support
-    # # del array.memory     # Delete whole array
-    # # in C++, corresponds to destroying whole array
+    array.insert(2, 'A2')
+    print(array)
 
-    # array.append(7)
-
-    # for i in range(array.size):  # get
-    #     print(array.memory[i])
-    array = Array(3)
-
-    for i in range(array.size):  # set
-        array.memory[i] = i+1
-
-    array.append(12)
-    array.append(4)
-
-    for i in range(10**6):
-        array.append(i)
-
-    print(len(array))
+    array.insert(1, 4)
+    print(array)
