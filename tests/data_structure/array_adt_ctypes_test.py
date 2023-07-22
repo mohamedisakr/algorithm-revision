@@ -208,6 +208,47 @@ class TestArray(TestCase):
         with self.assertRaises(AssertionError):
             self.array.insert(-1, 1)
 
+        # Define a test case for the __getitem__ and __setitem__ methods with negative index
+
+    def test_get_set_item_negative(self):
+        # Append some items to the array
+        self.array.append(1)
+        self.array.append(2)
+        self.array.append(3)
+        # Check that the items can be accessed by negative index
+        self.assertEqual(self.array[-1], 3)
+        self.assertEqual(self.array[-2], 2)
+        self.assertEqual(self.array[-3], 1)
+        # Check that the items can be modified by negative index
+        self.array[-1] = 6
+        self.array[-2] = 5
+        self.array[-3] = 4
+        self.assertEqual(self.array[-1], 6)
+        self.assertEqual(self.array[-2], 5)
+        self.assertEqual(self.array[-3], 4)
+
+    # Define a test case for the insert method with negative index
+    def test_insert_negative(self):
+        # Append some items to the array
+        self.array.append(1)
+        self.array.append(2)
+        self.array.append(3)
+        # Check that the array has the expected items
+        self.assertEqual(len(self.array), 3)
+        self.assertEqual(self.array[0], 1)
+        self.assertEqual(self.array[1], 2)
+        self.assertEqual(self.array[2], 3)
+        # Insert some items at different negative positions and check that they are inserted correctly
+        self.array.insert(-1, 4)  # Insert before the last item
+        self.assertEqual(len(self.array), 4)
+        self.assertEqual(self.array[0], 1)
+        self.assertEqual(self.array[1], 2)
+        self.assertEqual(self.array[2], 4)
+        self.assertEqual(self.array[3], 3)
+        self.array.insert(-3, 5)  # Insert in the middle
+        self.assertEqual(len(self.array), 5)
+        self.assertEqual(self.array[0], 1)
+
 
 # run the test cases
 if __name__ == '__main__':

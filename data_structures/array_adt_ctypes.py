@@ -67,6 +67,9 @@ class Array:
         self.size += 1
 
     def insert(self, index, value):
+        if index < 0:
+            index += self.size
+
         assert 0 <= index < self.size
 
         if self.size == self._capacity:
