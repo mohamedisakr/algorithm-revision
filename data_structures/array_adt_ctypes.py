@@ -100,6 +100,14 @@ class Array:
         self.size -= 1
         return value
 
+    def right_rotate(self):
+        last_item = self.memory[self.size-1]
+
+        for i in range(self.size-1, 0-1, -1):
+            self.memory[i+1] = self.memory[i]
+
+        self.memory[0] = last_item
+
 
 if __name__ == '__main__':
     '''

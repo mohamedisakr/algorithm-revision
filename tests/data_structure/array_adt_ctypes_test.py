@@ -71,6 +71,27 @@ class TestArray(TestCase):
         self.assertEqual(self.array[2], 2)
         self.assertEqual(self.array[3], 3)
 
+    def test_right_rotate(self):
+        # Append some items to the array
+        self.array.append(1)
+        self.array.append(2)
+        self.array.append(3)
+        self.array.append(4)
+        # Check that the array has the expected items
+        self.assertEqual(len(self.array), 4)
+        self.assertEqual(self.array[0], 1)
+        self.assertEqual(self.array[1], 2)
+        self.assertEqual(self.array[2], 3)
+        self.assertEqual(self.array[3], 4)
+
+        self.array.right_rotate()
+
+        self.assertEqual(len(self.array), 4)
+        self.assertEqual(self.array[0], 4)
+        self.assertEqual(self.array[1], 1)
+        self.assertEqual(self.array[2], 2)
+        self.assertEqual(self.array[3], 3)
+
     '''
     # Define a test case for the pop method
     def test_pop(self):
