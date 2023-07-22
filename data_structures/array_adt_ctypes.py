@@ -23,10 +23,22 @@ class Array:
         return self.size
 
     def __getitem__(self, index):
-        return self.memory[index]
+        if index < 0:
+            index += self.size
+        if 0 <= index < self.size:
+            return self.memory[index]
+        else:
+            # raise an exception if the index is out of bounds
+            raise IndexError("Array index out of range")
 
     def __setitem__(self, index, value):
-        self.memory[index] = value
+        if index < 0:
+            index += self.size
+        if 0 <= index < self.size:
+            self.memory[index] = value
+        else:
+            # raise an exception if the index is out of bounds
+            raise IndexError("Array index out of range")
 
     def __str__(self) -> str:
         result = ''
@@ -69,10 +81,19 @@ class Array:
         self.size += 1
 
     def pop(self, index):
-        assert 0 <= index < self.size
-        value = self.memory[index]
-        for i in range(self.size-1, index, -1):
-            self.memory[i-1] = self.memory[i]
+        if index < 0:
+            index += self.size
+
+        if 0 <= index < self.size:
+            value = self.memory[index]
+        else:
+            # raise an exception if the index is out of bounds
+            raise IndexError("Array index out of range")
+
+        # shift the elements from the index to the left by one position
+        for i in range(index, self.size-1):
+            self.memory[i] = self.memory[i+1]
+
         self.size -= 1
         return value
 
@@ -94,6 +115,7 @@ if __name__ == '__main__':
     print(array)
     '''
 
+    '''
     # pop
     array = Array()
     array.append(10)
@@ -104,3 +126,4 @@ if __name__ == '__main__':
 
     array.pop(2)
     print(array)
+    '''
