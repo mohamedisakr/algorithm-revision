@@ -68,8 +68,15 @@ class Array:
         self.memory[index] = value
         self.size += 1
 
+    def pop(self, index):
+        assert 0 <= index < self.size
+        for i in range(self.size-1, index, -1):
+            self.memory[i-1] = self.memory[i]
+        self.size -= 1
+
 
 if __name__ == '__main__':
+    '''
     array = Array()
 
     array.append(56)
@@ -82,4 +89,16 @@ if __name__ == '__main__':
     print(array)
 
     array.insert(1, 4)
+    print(array)
+    '''
+
+    # pop
+    array = Array()
+    array.append(10)
+    array.append(20)
+    array.append(30)
+    array.append(40)
+    print(array)
+
+    array.pop(2)
     print(array)
