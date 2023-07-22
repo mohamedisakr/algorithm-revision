@@ -70,9 +70,11 @@ class Array:
 
     def pop(self, index):
         assert 0 <= index < self.size
+        value = self.memory[index]
         for i in range(self.size-1, index, -1):
             self.memory[i-1] = self.memory[i]
         self.size -= 1
+        return value
 
 
 if __name__ == '__main__':
