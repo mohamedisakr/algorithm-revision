@@ -108,6 +108,14 @@ class Array:
 
         self.memory[0] = last_item
 
+    def left_rotate(self):
+        first_item = self.memory[0]
+
+        for i in range(1, self.size, 1):
+            self.memory[i-1] = self.memory[i]
+
+        self.memory[self.size-1] = first_item
+
 
 if __name__ == '__main__':
     '''
