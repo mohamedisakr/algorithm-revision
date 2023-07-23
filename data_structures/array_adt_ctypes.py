@@ -83,6 +83,14 @@ class Array:
         self.memory[index] = value
         self.size += 1
 
+    def index_transposition(self, value):
+        for i in range(self.size):
+            if self.memory[i] == value:
+                self.memory[i-1], self.memory[i] = self.memory[i], self.memory[i-1]
+                return i-1
+
+        return -1
+
     def pop(self, index):
         if index < 0:
             index += self.size
