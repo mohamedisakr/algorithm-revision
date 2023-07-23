@@ -144,7 +144,7 @@ class TestArray(TestCase):
         self.assertEqual(self.array[3], 0)
         self.assertEqual(self.array[4], 1)
 
-    def test_index_transposition(self):
+    def test_index_transposition_1_time(self):
         # Append some items to the array
         self.array.append(10)
         self.array.append(20)
@@ -169,6 +169,98 @@ class TestArray(TestCase):
         self.assertEqual(self.array[2], 30)
         self.assertEqual(self.array[3], 50)
         self.assertEqual(self.array[4], 40)
+
+    def test_index_transposition_2_times(self):
+        # Append some items to the array
+        self.array.append(10)
+        self.array.append(20)
+        self.array.append(30)
+        self.array.append(40)
+        self.array.append(50)
+
+        # Check that the array has the expected items
+        self.assertEqual(len(self.array), 5)
+        self.assertEqual(self.array[0], 10)
+        self.assertEqual(self.array[1], 20)
+        self.assertEqual(self.array[2], 30)
+        self.assertEqual(self.array[3], 40)
+        self.assertEqual(self.array[4], 50)
+
+        value = 50
+        self.array.index_transposition(value)
+
+        self.assertEqual(len(self.array), 5)
+        self.assertEqual(self.array[0], 10)
+        self.assertEqual(self.array[1], 20)
+        self.assertEqual(self.array[2], 30)
+        self.assertEqual(self.array[3], 50)
+        self.assertEqual(self.array[4], 40)
+
+        self.array.index_transposition(value)
+
+        self.assertEqual(len(self.array), 5)
+        self.assertEqual(self.array[0], 10)
+        self.assertEqual(self.array[1], 20)
+        self.assertEqual(self.array[2], 50)
+        self.assertEqual(self.array[3], 30)
+        self.assertEqual(self.array[4], 40)
+
+    def test_index_transposition_not_less_than_zero(self):
+        # Append some items to the array
+        self.array.append(10)
+        self.array.append(20)
+        self.array.append(30)
+        self.array.append(40)
+        self.array.append(50)
+
+        # Check that the array has the expected items
+        self.assertEqual(len(self.array), 5)
+        self.assertEqual(self.array[0], 10)
+        self.assertEqual(self.array[1], 20)
+        self.assertEqual(self.array[2], 30)
+        self.assertEqual(self.array[3], 40)
+        self.assertEqual(self.array[4], 50)
+
+        value = 20
+        self.array.index_transposition(value)
+
+        self.assertEqual(len(self.array), 5)
+        self.assertEqual(self.array[0], 20)
+        self.assertEqual(self.array[1], 10)
+        self.assertEqual(self.array[2], 30)
+        self.assertEqual(self.array[3], 40)
+        self.assertEqual(self.array[4], 50)
+
+        self.array.index_transposition(value)
+
+        self.assertEqual(len(self.array), 5)
+        self.assertEqual(self.array[0], 20)
+        self.assertEqual(self.array[1], 10)
+        self.assertEqual(self.array[2], 30)
+        self.assertEqual(self.array[3], 40)
+        self.assertEqual(self.array[4], 50)
+
+    def test_index_transposition_value_not_exist(self):
+        # Append some items to the array
+        self.array.append(10)
+        self.array.append(20)
+        self.array.append(30)
+        self.array.append(40)
+        self.array.append(50)
+
+        # Check that the array has the expected items
+        self.assertEqual(len(self.array), 5)
+        self.assertEqual(self.array[0], 10)
+        self.assertEqual(self.array[1], 20)
+        self.assertEqual(self.array[2], 30)
+        self.assertEqual(self.array[3], 40)
+        self.assertEqual(self.array[4], 50)
+
+        value = 100
+        index_pos = self.array.index_transposition(value)
+
+        self.assertEqual(len(self.array), 5)
+        self.assertEqual(index_pos, -1)
 
     def test_pop_from_beginning(self):
         # Append some items to the array
