@@ -108,6 +108,14 @@ class Array:
 
         self.memory[0] = last_item
 
+    def right_rotate_steps(self, times):
+        if times > self.size:
+            return
+
+        first = self.memory[0: self.size-times: 1]
+        second = self.memory[self.size-times: self.size: 1]
+        self.memory = second+first
+
     def left_rotate(self):
         first_item = self.memory[0]
 
