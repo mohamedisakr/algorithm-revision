@@ -94,7 +94,9 @@ class Array:
 
     def index_transposition(self, value):
         for i in range(self.size):
-            if self.memory[i] == value and i > 0:
+            if self.memory[i] == value:  # and i > 0:
+                if i == 0:
+                    return 0
                 self.memory[i-1], self.memory[i] = self.memory[i], self.memory[i-1]
                 return i-1
 
@@ -110,6 +112,9 @@ class Array:
             for i in range(index, self.size-1):
                 self.memory[i] = self.memory[i+1]
 
+            # for i in range(index+1, self.size):
+            #     self.memory[i-1] = self.memory[i]
+
             self.size -= 1
             return value
         else:
@@ -117,25 +122,35 @@ class Array:
             raise IndexError("Array index out of range")
 
     def right_rotate(self):
+        if self.size == 0:
+            return
+
         last_item = self.memory[self.size-1]
 
-        for i in range(self.size-1, 0-1, -1):
+        for i in range(self.size-1, -1, -1):
             self.memory[i+1] = self.memory[i]
 
         self.memory[0] = last_item
 
     def right_rotate_steps(self, times):
-        if times > self.size:
-            return
+        times %= self.size
+        for step in range(times):
+            self.right_rotate()
 
-        first = self.memory[0: self.size-times: 1]
-        second = self.memory[self.size-times: self.size: 1]
-        self.memory = second+first
+        # if times > self.size:
+        #     return
+
+        # first = self.memory[0: self.size-times: 1]
+        # second = self.memory[self.size-times: self.size: 1]
+        # self.memory = second+first
 
     def left_rotate(self):
+        if self.size == 0:
+            return
+
         first_item = self.memory[0]
 
-        for i in range(1, self.size, 1):
+        for i in range(1, self.size):
             self.memory[i-1] = self.memory[i]
 
         self.memory[self.size-1] = first_item
