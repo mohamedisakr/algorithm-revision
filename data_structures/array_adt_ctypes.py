@@ -62,26 +62,35 @@ class Array:
             self.expand_capacity()
 
         self.memory[self.size] = item
-
-        # increment capacity
         self.size += 1
 
     def insert(self, index, value):
+        '''
+         if index < 0:
+            index += self.size
+        if 0 <= index < self.size:
+            self.memory[index] = value
+        else:
+            # raise an exception if the index is out of bounds
+            raise IndexError("Array index out of range")
+        '''
         if index < 0:
             index += self.size
-
-        assert 0 <= index < self.size
 
         if self.size == self._capacity:
             self.expand_capacity()
 
-        # shift all items 1 unit to the right
-        # shift from the end of array
-        for i in range(self.size-1, index-1, -1):
-            self.memory[i+1] = self.memory[i]
+        if 0 <= index < self.size:
+            # shift all items 1 unit to the right
+            # shift from the end of array
+            for i in range(self.size-1, index-1, -1):
+                self.memory[i+1] = self.memory[i]
 
-        self.memory[index] = value
-        self.size += 1
+            self.memory[index] = value
+            self.size += 1
+        else:
+            # raise an exception if the index is out of bounds
+            raise IndexError("Array index out of range")
 
     def index_transposition(self, value):
         for i in range(self.size):
@@ -97,16 +106,15 @@ class Array:
 
         if 0 <= index < self.size:
             value = self.memory[index]
+            # shift the elements from the index to the left by one position
+            for i in range(index, self.size-1):
+                self.memory[i] = self.memory[i+1]
+
+            self.size -= 1
+            return value
         else:
             # raise an exception if the index is out of bounds
             raise IndexError("Array index out of range")
-
-        # shift the elements from the index to the left by one position
-        for i in range(index, self.size-1):
-            self.memory[i] = self.memory[i+1]
-
-        self.size -= 1
-        return value
 
     def right_rotate(self):
         last_item = self.memory[self.size-1]

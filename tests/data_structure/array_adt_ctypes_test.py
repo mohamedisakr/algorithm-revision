@@ -358,13 +358,17 @@ class TestArray(TestCase):
 
     # Define a test case for invalid insert errors
     def test_invalid_insert_error(self):
-        # Check that inserting into an empty array with a non-zero index raises an AssertionError
-        with self.assertRaises(AssertionError):
+        # Check that inserting into an empty array with a non-zero
+        # index raises an AssertionError
+        # with self.assertRaises(AssertionError):
+        with self.assertRaises(IndexError):
             self.array.insert(1, 1)
-        with self.assertRaises(AssertionError):
+        # with self.assertRaises(AssertionError):
+        with self.assertRaises(IndexError):
             self.array.insert(-1, 1)
 
-        # Define a test case for the __getitem__ and __setitem__ methods with negative index
+    # Define a test case for the __getitem__ and __setitem__ methods
+    # with negative index
 
     def test_get_set_item_negative(self):
         # Append some items to the array
