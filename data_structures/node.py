@@ -1,12 +1,32 @@
 class Node:
-    def __init__(self, val, next=None):
+    def __init__(self, val: int, next=None):
+        if val is not None and not isinstance(val, int):
+            # raise an exception if val is not None and not an int
+            raise TypeError("val must be of int data type")
+
+        if val is not None and val < 0:
+            # raise an exception if val is not None and negative
+            raise ValueError("val must be non-negative")
+
         self.val = val
         self.next = next
 
     def __str__(self) -> str:
+        if self.val is None or not isinstance(self.val, int):
+            return ""
         return f'{self.val}'
 
+    # def show_node_list(self, head):
+    #     while head is not None:
+    #         print(f'{head} ', end='-> ')
+    #         head = head.next
+    #     print(f'{None}', end='')
+
     def show_node_list(self, head):
+        if head.val is None:
+            # print nothing if the node list is empty
+            print("", end="")
+            return
         while head is not None:
             print(f'{head} ', end='-> ')
             head = head.next

@@ -46,6 +46,42 @@ class TestNode(TestCase):
         # use assertIsNone to check if the value is not found
         self.assertIsNone(self.node3.find(self.node3, 4))
 
+    def test_init_invalid_1(self):
+        # test the initialization of nodes with invalid values
+        # use assertRaises to check if an exception is raised
+        with self.assertRaises(TypeError):
+            # try to create a node with a non-numeric value
+            node = Node("a")
+        with self.assertRaises(ValueError):
+            # try to create a node with a negative value
+            node = Node(-1)
+
+    def test_show_node_list_empty(self):
+        # test the show_node_list method with an empty node list
+        # use a StringIO object to capture the output
+        from io import StringIO
+        import sys
+        output = StringIO()
+        sys.stdout = output
+        # create an empty node
+        node = Node(None)
+        node.show_node_list(node)
+        sys.stdout = sys.__stdout__
+        # compare the output with the expected string
+        self.assertEqual(output.getvalue(), "")
+
+    def test_find_empty(self):
+        # test the find method with an empty node list
+        # create an empty node
+        node = Node(None)
+        # use assertIsNone to check if the value is not found
+        self.assertIsNone(node.find(node, 1))
+
+    def test_find_invalid(self):
+        # test the find method with an invalid value
+        # use assertIsNone to check if the value is not found
+        self.assertIsNone(self.node3.find(self.node3, "a"))
+
 
 if __name__ == "__main__":
     main()
