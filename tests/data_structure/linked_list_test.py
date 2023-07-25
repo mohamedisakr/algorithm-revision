@@ -1,4 +1,5 @@
 from unittest import TestCase, makeSuite, TestSuite, TextTestRunner
+from random import randint
 from data_structures.linked_list import LinkedList
 
 
@@ -139,25 +140,126 @@ class TestLinkedList(TestCase):
         self.list.insert(10)
         self.assertEqual(len(self.list), 14)
 
+    def test_nth_node(self):
+        # create a linked list with some nodes
+        my_list = LinkedList()
+        my_list.insert(1)
+        my_list.insert(2)
+        my_list.insert(3)
+
+        my_list.show_node_list()
+
+        # check that the nth node function returns the correct node data
+        self.assertEqual(my_list.nth_node(1), 1)  # first node
+        self.assertEqual(my_list.nth_node(2), 2)  # second node
+        self.assertEqual(my_list.nth_node(3), 3)  # third node
+
+    def test_nth_node_out_of_range(self):
+        # create a linked list with some nodes
+        my_list = LinkedList()
+        my_list.insert(1)
+        my_list.insert(2)
+        my_list.insert(3)
+
+        my_list.show_node_list()
+
+        self.assertIsNone(my_list.nth_node(0))
+        self.assertIsNone(my_list.nth_node(4))
+
+        # check that the nth node function raises an exception
+        # if n is out of range
+        # with self.assertRaises(IndexError):
+        #     my_list.nth_node(0)  # n cannot be zero
+        # with self.assertRaises(IndexError):
+        #     my_list.nth_node(4)  # n cannot be greater than the list length
+
+    def test_empty_list(self):
+        # create an empty linked list
+        my_list = LinkedList()
+
+        self.assertIsNone(my_list.nth_node(0))
+        self.assertIsNone(my_list.nth_node(1))
+        self.assertIsNone(my_list.nth_node(-1))
+
+        # check that the nth node function raises an exception for any n
+        # with self.assertRaises(IndexError):
+        #     my_list.nth_node(1)  # n cannot be positive
+        # with self.assertRaises(IndexError):
+        #     my_list.nth_node(-1)  # n cannot be negative
+        # with self.assertRaises(IndexError):
+        #     my_list.nth_node(0)  # n cannot be zero
+
+    def test_negative_n(self):
+        # create a linked list with some nodes
+        my_list = LinkedList()
+        my_list.insert(1)
+        my_list.insert(2)
+        my_list.insert(3)
+
+        self.assertIsNone(my_list.nth_node(-1))
+        self.assertIsNone(my_list.nth_node(-2))
+        self.assertIsNone(my_list.nth_node(-3))
+
+        # check that the nth node function raises an exception for negative n
+        # with self.assertRaises(IndexError):
+        #     my_list.nth_node(-1)  # n cannot be negative
+        # with self.assertRaises(IndexError):
+        #     my_list.nth_node(-2)  # n cannot be negative
+        # with self.assertRaises(IndexError):
+        #     my_list.nth_node(-3)  # n cannot be negative
+
+    def test_large_n(self):
+        # create a linked list with some nodes
+        my_list = LinkedList()
+        my_list.insert(1)
+        my_list.insert(2)
+        my_list.insert(3)
+
+        self.assertIsNone(my_list.nth_node(4))
+        self.assertIsNone(my_list.nth_node(5))
+        self.assertIsNone(my_list.nth_node(6))
+
+        # # check that the nth node function raises an exception for n larger than the list length
+        # with self.assertRaises(IndexError):
+        #     my_list.nth_node(4)  # n cannot be greater than 3
+        # with self.assertRaises(IndexError):
+        #     my_list.nth_node(5)  # n cannot be greater than 3
+        # with self.assertRaises(IndexError):
+        #     my_list.nth_node(6)  # n cannot be greater than 3
+
+    def test_one_node_list(self):
+        # create a linked list with one node
+        my_list = LinkedList()
+        my_list.insert(1)
+
+        # check that the nth node function returns the only node data
+        self.assertEqual(my_list.nth_node(1), 1)  # first and only node
+
+        self.assertIsNone(my_list.nth_node(0))
+        self.assertIsNone(my_list.nth_node(2))
+
+        # check that the nth node function raises an exception for any other n
+        # with self.assertRaises(IndexError):
+        #     my_list.nth_node(0)  # n cannot be zero
+        # with self.assertRaises(IndexError):
+        #     my_list.nth_node(2)  # n cannot be greater than 1
+
+    # def test_random_n(self):
+    #     # create a linked list with some random nodes
+    #     my_list = LinkedList()
+    #     for i in range(10):
+    #         # insert random numbers from 1 to 100
+    #         my_list.insert(randint(1, 100))
+
+    #     # check that the nth node function returns the correct node data for some random n
+    #     for i in range(10):
+    #         n = randint(1, 10)  # generate random n from 1 to 10
+    #         # compare with the get_data method
+    #         self.assertEqual(my_list.nth_node(n), my_list.get_data(n))
+
 
 if __name__ == "__main__":
     # This block runs the test suite when the script is executed
     suite = TestSuite()
     suite.addTest(makeSuite(TestLinkedList))
     TextTestRunner().run(suite)
-
-# test_linked_list.py
-
-# import unittest
-# from linked_list import LinkedList # assuming your linked list class is in a file named linked_list.py
-
-# class TestLinkedList(unittest.TestCase):
-
-#     def setUp(self):
-#         # This method is executed before each test method
-#         # You can use it to create a test instance of your linked list class
-#         self.ll = LinkedList()
-
-
-# if __name__ == "__main__":
-#     unittest.main() # run all the tests in this file

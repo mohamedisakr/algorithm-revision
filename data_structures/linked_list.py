@@ -24,7 +24,7 @@ class LinkedList:
     def show_node_list(self):
         temp_head = self.head
         while temp_head is not None:
-            print(f'{temp_head}', end=' -> ')
+            print(f'{temp_head.val}', end=' -> ')
             temp_head = temp_head.next
         print(f'{None}', end='')
 
@@ -36,6 +36,20 @@ class LinkedList:
 
     def sum_total(self):
         return self.total_sum
+
+    def nth_node(self, n):
+        if self.head is None or n < 1 or n > self.size:
+            return None
+        if n == 1:
+            return self.head.val
+
+        temp_head = self.head
+        for i in range(n):
+            if i+1 == n:
+                return temp_head.val
+            temp_head = temp_head.next
+
+        return None
 
     def insert(self, value):
         if value is not None and not isinstance(value, int):
