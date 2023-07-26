@@ -69,25 +69,22 @@ class LinkedList:
         return -1
 
     def index_transposition(self, value: int) -> int:
-        if self.head is None and self.tail is None:
-            # if self.is_empty is True:
+        if self.is_empty is True:
             return -1
 
         if value is None or not isinstance(value, int):
             raise TypeError("val must be of int data type")
 
-        if self.head.val == value:
-            return 0
-
-        prev = None
+        previous = None
         current = self.head
         idx = 0
         while current is not None:
             if current.val == value:
-                prev.val, current.val = current.val, prev.val
+                if previous is None:
+                    return idx
+                previous.val, current.val = current.val, previous.val
                 return idx-1
-            prev = current
-            current = current.next
+            previous, current = current, current.next
             idx += 1
         return -1
 
