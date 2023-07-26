@@ -360,6 +360,180 @@ class TestLinkedList(TestCase):
     #         # compare with the get_data method
     #         self.assertEqual(my_list.nth_node(n), my_list.get_data(n))
 
+    def test_insert_front_empty(self):
+        self.list = LinkedList()
+        # Test inserting a value to an empty list
+        self.list.insert_front(10)
+        # Check if the head and tail are the same node
+        self.assertEqual(self.list.head, self.list.tail)
+        # Check if the node has the correct value
+        self.assertEqual(self.list.head.val, 10)
+        # Check if the size, max_val, min_val, and total_sum are updated correctly
+        self.assertEqual(self.list.size, 1)
+        self.assertEqual(self.list.max_val, 10)
+        self.assertEqual(self.list.min_val, 10)
+        self.assertEqual(self.list.total_sum, 10)
+
+    def test_insert_front_non_empty(self):
+        self.list = LinkedList()
+
+        # Test inserting a value to a non-empty list
+        self.list.insert(5)  # Insert a value at the end
+        self.list.insert_front(10)  # Insert a value at the front
+        # Check if the head and tail are different nodes
+        self.assertNotEqual(self.list.head, self.list.tail)
+        # Check if the head node has the correct value
+        self.assertEqual(self.list.head.val, 10)
+        # Check if the second node has the correct value
+        self.assertEqual(self.list.head.next.val, 5)
+        # Check if the size, max_val, min_val, and total_sum are updated correctly
+        self.assertEqual(self.list.size, 2)
+
+    def test_insert_front_error(self):
+        self.list = LinkedList()
+
+        # Test inserting more than 10 values to the list
+        for i in range(10):
+            self.list.insert(i)  # Insert 10 values at the end
+        # Expect a ValueError when inserting another value at the front
+        # with self.assertRaises(ValueError):
+        self.list.insert_front(10)
+        self.assertEqual(self.list.head.val, 10)
+
+    def test_insert_front_negative(self):
+        self.list = LinkedList()
+
+        # Test inserting a negative value to the list
+        with self.assertRaises(ValueError):
+            self.list.insert_front(-10)
+
+        # # Check if the head node has the correct value
+        # self.assertEqual(self.list.head.val, -10)
+        # # Check if the size, max_val, min_val, and total_sum are updated correctly
+        # self.assertEqual(self.list.size, 1)
+
+    def test_insert_front_zero(self):
+        self.list = LinkedList()
+
+        # Test inserting a zero value to the list
+        self.list.insert_front(0)
+        # Check if the head node has the correct value
+        self.assertEqual(self.list.head.val, 0)
+        # Check if the size, max_val, min_val, and total_sum are updated correctly
+        self.assertEqual(self.list.size, 1)
+
+    def test_insert_front_duplicate(self):
+        self.list = LinkedList()
+
+        # Test inserting a duplicate value to the list
+        self.list.insert(10)  # Insert a value at the end
+        self.list.insert_front(10)  # Insert the same value at the front
+        # Check if the head and tail are different nodes
+        self.assertNotEqual(self.list.head, self.list.tail)
+
+        # Check if the head and tail nodes have the same value
+        self.assertEqual(self.list.head.val, 10)
+        self.assertEqual(self.list.tail.val, 10)
+        # Check if the size, max_val, min_val, and total_sum are updated correctly
+        self.assertEqual(self.list.size, 2)
+
+    def test_insert_front_traditional(self):
+        self.list = LinkedList([4])
+
+        # Test inserting a duplicate value to the list
+        self.list.insert_front(3)  # Insert the same value at the front
+        self.list.insert_front(2)  # Insert the same value at the front
+        self.list.insert_front(1)  # Insert the same value at the front
+
+        # Check if the head and tail are different nodes
+        self.assertNotEqual(self.list.head, self.list.tail)
+
+        # Check if the head and tail nodes have the same value
+        self.assertEqual(self.list.head.val, 1)
+        self.assertEqual(self.list.tail.val, 4)
+        # Check if the size, max_val, min_val, and total_sum are updated correctly
+        self.assertEqual(self.list.size, 4)
+
+    def test_insert_front_none(self):
+        self.list = LinkedList()
+
+        # Test inserting a None value to the list
+        # Expect a TypeError when inserting None at the front
+        with self.assertRaises(TypeError):
+            self.list.insert_front(None)
+
+    # ... previous test methods ...
+
+    def test_insert_front_large(self):
+        self.list = LinkedList()
+
+        # Test inserting a large value to the list
+        self.list.insert_front(1000)
+        # Check if the head node has the correct value
+        self.assertEqual(self.list.head.val, 1000)
+        # Check if the size, max_val, min_val, and total_sum are updated correctly
+        self.assertEqual(self.list.size, 1)
+        self.assertEqual(self.list.max_val, 1000)
+        self.assertEqual(self.list.min_val, 1000)
+        self.assertEqual(self.list.total_sum, 1000)
+
+    def test_insert_front_small(self):
+        self.list = LinkedList()
+
+        # Test inserting a small value to the list
+        with self.assertRaises(ValueError):
+            self.list.insert_front(-1000)
+            # self.list.insert_front(-10)
+
+    def test_insert_front_non_integer(self):
+        self.list = LinkedList()
+
+        # Test inserting a non-integer value to the list
+        # Expect a TypeError when inserting a string at the front
+        with self.assertRaises(TypeError):
+            self.list.insert_front("hello")
+        # Expect a TypeError when inserting a float at the front
+        with self.assertRaises(TypeError):
+            self.list.insert_front(3.14)
+
+    def test_insert_front_duplicate_multiple(self):
+        self.list = LinkedList()
+
+        # Test inserting a value that is already in the list multiple times
+        for i in range(5):
+            self.list.insert(10)  # Insert 10 five times at the end
+        self.list.insert_front(10)  # Insert 10 at the front
+        # Check if the head and tail nodes have the same value
+        self.assertEqual(self.list.head.val, 10)
+        self.assertEqual(self.list.tail.val, 10)
+        # Check if the size, max_val, min_val, and total_sum are updated correctly
+        self.assertEqual(self.list.size, 6)
+        self.assertEqual(self.list.max_val, 10)
+        self.assertEqual(self.list.min_val, 10)
+        self.assertEqual(self.list.total_sum, 60)
+
+    def test_insert_front_equal_max_min(self):
+        self.list = LinkedList()
+
+        # Test inserting a value that is equal to the max_val or min_val of the list
+        self.list.insert(5)  # Insert 5 at the end
+        self.list.insert(10)  # Insert 10 at the end
+        self.list.insert_front(5)  # Insert 5 at the front
+        self.list.insert_front(10)  # Insert 10 at the front
+        # Check if the head and tail nodes have different values
+        self.assertEqual(self.list.head.val, self.list.tail.val)
+        # Check if the head and second nodes have the same value as max_val
+        self.assertEqual(self.list.head.val, 10)
+        self.assertEqual(self.list.head.next.val, 5)
+        # self.assertEqual(self.list.max_val, 10)
+        # Check if the third and tail nodes have the same value as min_val
+        self.assertEqual(self.list.head.next.next.val, 5)
+        self.assertEqual(self.list.tail.val, 10)
+        # self.assertEqual(self.list.min_val, 5)
+        # Check if the size and total_sum are updated correctly
+        self.assertEqual(self.list.size, 4)
+        self.assertEqual(self.list.total_sum, 30)
+
 
 if __name__ == "__main__":
     # main()

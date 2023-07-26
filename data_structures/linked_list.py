@@ -7,7 +7,6 @@ class LinkedList:
 
     # def __init__(self):
     def __init__(self, iter_values=None):
-
         self.head = None
         self.tail = None
         self.size = 0
@@ -95,6 +94,31 @@ class LinkedList:
             idx += 1
         return -1
 
+    def insert_front(self, value):
+        if value is None or not isinstance(value, int) or isinstance(value, bool):
+            # raise an exception if val is not None and not an int
+            raise TypeError("val must be of int data type")
+
+        if value is not None and value < 0:
+            # raise an exception if val is not None and negative
+            raise ValueError("val must be non-negative")
+
+        new_node = Node(value)
+
+        if self.is_empty():
+            self.head = new_node
+            self.tail = new_node
+        else:
+            temp_head = self.head
+            self.head = new_node
+            new_node.next = temp_head
+
+        self.size += 1
+
+        self.max_val = max(self.max_val, value)
+        self.min_val = min(self.min_val, value)
+        self.total_sum += value
+
     def insert(self, value):
         if value is None or not isinstance(value, int) or isinstance(value, bool):
             # raise an exception if val is not None and not an int
@@ -107,7 +131,7 @@ class LinkedList:
         new_node = Node(value)
 
         # empty linked list
-        if self.head is None:
+        if self.is_empty():  # self.head is None:
             self.head = new_node
             self.tail = new_node
         else:
