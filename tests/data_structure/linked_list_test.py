@@ -1,5 +1,33 @@
-from unittest import TestCase, makeSuite, TestSuite, TextTestRunner
+from unittest import TestCase, main, makeSuite, TestSuite, TextTestRunner
 from data_structures.linked_list import LinkedList
+
+
+class TestLinkedListDataIntegrity(TestCase):
+    def test_verify_empty_defaults(self):
+        # self.empty_list = LinkedList()
+        self.empty_list = LinkedList()
+        self.assertEqual(self.empty_list.size, 0)
+        self.assertIsNone(self.empty_list.head)
+        self.assertIsNone(self.empty_list.tail)
+
+    def test_verify_1_element(self):
+        # self.one_element_list = LinkedList([1])
+        self.one_element_list = LinkedList([1])
+        self.assertEqual(self.one_element_list.size, 1)
+        self.assertIsNotNone(self.one_element_list.head)
+        self.assertIsNotNone(self.one_element_list.tail)
+        self.assertEqual(self.one_element_list.head,
+                         self.one_element_list.tail)
+
+    def test_verify_2_elements(self):
+        # self.one_element_list = LinkedList([1])
+        self.two_element_list = LinkedList([1, 2])
+        self.assertEqual(self.two_element_list.size, 2)
+        self.assertIsNotNone(self.two_element_list.head)
+        self.assertIsNotNone(self.two_element_list.tail)
+        self.assertEqual(self.two_element_list.head.next,
+                         self.two_element_list.tail)
+        # self.assertEqual(self.two_element_list.size, len(self._debug_data))
 
 
 class TestLinkedList(TestCase):
@@ -334,7 +362,8 @@ class TestLinkedList(TestCase):
 
 
 if __name__ == "__main__":
+    # main()
     # This block runs the test suite when the script is executed
     suite = TestSuite()
-    suite.addTest(makeSuite(TestLinkedList))
+    suite.addTest(makeSuite([TestLinkedList, TestLinkedListDataIntegrity]))
     TextTestRunner().run(suite)
