@@ -534,6 +534,70 @@ class TestLinkedList(TestCase):
         self.assertEqual(self.list.size, 4)
         self.assertEqual(self.list.total_sum, 30)
 
+        # delete front
+    def test_delete_front_non_empty(self):
+        # create a linked list with three nodes
+        my_list = LinkedList([1, 2, 3])
+        # delete the front node
+        my_list.delete_front()
+        # check that the head is now 2
+        self.assertEqual(my_list.head.val, 2)
+        # check that the tail is still 3
+        self.assertEqual(my_list.tail.val, 3)
+        # check that the size is now 2
+        self.assertEqual(my_list.size, 2)
+        # check that the sum is now 5
+        self.assertEqual(my_list.total_sum, 5)
+
+    def test_delete_front_empty(self):
+        # create an empty list
+        my_list = LinkedList()
+        # try to delete the front node
+        my_list.delete_front()
+        # check that the head is still None
+        self.assertIsNone(my_list.head)
+        # check that the tail is still None
+        self.assertIsNone(my_list.tail)
+        # check that the size is still 0
+        self.assertEqual(my_list.size, 0)
+        # check that the sum is still 0
+        self.assertEqual(my_list.total_sum, 0)
+
+    def test_delete_front_single(self):
+        # create a list with one node
+        my_list = LinkedList([5])
+        # delete the front node
+        my_list.delete_front()
+        # check that the head is now None
+        self.assertIsNone(my_list.head)
+        # check that the tail is now None
+        self.assertIsNone(my_list.tail)
+        # check that the size is now 0
+        self.assertEqual(my_list.size, 0)
+        # check that the sum is now 0
+        self.assertEqual(my_list.total_sum, 0)
+
+    def test_delete_front_negative(self):
+        # create a list with negative values
+        my_list = LinkedList([1, 2, 3])
+        # delete the front node
+        my_list.delete_front()
+        # check that the head is now 2
+        self.assertEqual(my_list.head.val, 2)
+        # check that the tail is still 3
+        self.assertEqual(my_list.tail.val, 3)
+        # check that the size is now 2
+        self.assertEqual(my_list.size, 2)
+        # check that the sum is now 5
+        self.assertEqual(my_list.total_sum, 5)
+
+    # def test_delete_front_exception(self):
+    #     # create a list with an invalid value
+    #     my_list = LinkedList([1, 2, "a"])
+    #     # try to delete the front node
+    #     with self.assertRaises(TypeError):
+    #         my_list.delete_front()
+
 
 if __name__ == "__main__":
     # main()

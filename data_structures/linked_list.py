@@ -119,6 +119,24 @@ class LinkedList:
         self.min_val = min(self.min_val, value)
         self.total_sum += value
 
+    def delete_front(self):
+        if self.is_empty():
+            return
+        if self.size == 1:
+            self.head = None
+            self.tail = None
+            self.size = 0
+            self.max_val = -math.inf
+            self.min_val = math.inf
+            self.total_sum = 0
+            return
+
+        temp_head = self.head
+        self.head = temp_head.next
+        self.total_sum -= temp_head.val
+        self.size -= 1
+        temp_head = None
+
     def insert(self, value):
         if value is None or not isinstance(value, int) or isinstance(value, bool):
             # raise an exception if val is not None and not an int
