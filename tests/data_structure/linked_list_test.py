@@ -1,5 +1,4 @@
 from unittest import TestCase, makeSuite, TestSuite, TextTestRunner
-from random import randint
 from data_structures.linked_list import LinkedList
 
 
@@ -49,20 +48,8 @@ class TestLinkedList(TestCase):
         with self.assertRaises(TypeError):
             # try to create a node with a non-numeric value
             self.list.insert(None)
-        # with self.assertRaises(ValueError):
-        #     # try to create a node with a negative value
-        #     node = Node(-1)
-
-        # self.list.insert(None)
-        # self.assertIsNone(self.list.tail.val,
-        #                   "The tail value should be None")
-        # self.assertEqual(len(self.list), 4, "The length should be 4")
 
     def test_insert_negative(self):
-        # This method tests the insert method with a negative value
-        # self.assertEqual(self.list.tail.val, -1,
-        #                  "The tail value should be -1")
-        # self.assertEqual(len(self.list), 4, "The length should be 4")
         with self.assertRaises(ValueError):
             # try to create a node with a negative value
             self.list.insert(-1)
@@ -89,42 +76,6 @@ class TestLinkedList(TestCase):
         # check if the size is updated correctly
         # self.assertEqual(self.list.size, 3)
         self.assertEqual(len(self.list), 6)
-
-    # def test_insert_1(self):
-    #     # This method tests the insert method of your linked list class
-    #     # You can use self.assertEqual to check if two values are equal
-    #     self.list.insert(10)
-    #     self.list.insert(20)
-    #     self.list.insert(30)
-
-    #     # check if the size is updated correctly
-    #     self.assertEqual(self.list.size, 3)
-
-    #     # check if the head node has the correct value
-    #     self.assertEqual(self.list.head.val, 10)
-
-    #     # check if the tail node has the correct value
-    #     self.assertEqual(self.list.tail.val, 30)
-
-    #     # check if the max value is updated correctly
-    #     self.assertEqual(self.list.max_value(), 30)
-
-    #     # check if the min value is updated correctly
-    #     self.assertEqual(self.list.min_value(), 10)
-
-    #     # check if the sum is updated correctly
-    #     self.assertEqual(self.list.sum_total(), 60)
-
-    # def test_show_node_list_1(self):
-    #     # This method tests the show_node_list method of your linked list class
-    #     # You can use self.assertMultiLineEqual to check if two multi-line strings are equal
-    #     self.list.insert(10)
-    #     self.list.insert(20)
-    #     self.list.insert(30)
-    #     expected_output = "10 -> 20 -> 30 -> None"
-    #     actual_output = self.list.show_node_list()
-    #     # check if the output matches the expected output
-    #     self.assertMultiLineEqual(expected_output, actual_output)
 
     def test_insert_error(self):
         # This method tests if the insert method raises an error when the
@@ -166,13 +117,6 @@ class TestLinkedList(TestCase):
         self.assertIsNone(my_list.nth_node(0))
         self.assertIsNone(my_list.nth_node(4))
 
-        # check that the nth node function raises an exception
-        # if n is out of range
-        # with self.assertRaises(IndexError):
-        #     my_list.nth_node(0)  # n cannot be zero
-        # with self.assertRaises(IndexError):
-        #     my_list.nth_node(4)  # n cannot be greater than the list length
-
     def test_empty_list(self):
         # create an empty linked list
         my_list = LinkedList()
@@ -180,14 +124,6 @@ class TestLinkedList(TestCase):
         self.assertIsNone(my_list.nth_node(0))
         self.assertIsNone(my_list.nth_node(1))
         self.assertIsNone(my_list.nth_node(-1))
-
-        # check that the nth node function raises an exception for any n
-        # with self.assertRaises(IndexError):
-        #     my_list.nth_node(1)  # n cannot be positive
-        # with self.assertRaises(IndexError):
-        #     my_list.nth_node(-1)  # n cannot be negative
-        # with self.assertRaises(IndexError):
-        #     my_list.nth_node(0)  # n cannot be zero
 
     def test_negative_n(self):
         # create a linked list with some nodes
@@ -200,14 +136,6 @@ class TestLinkedList(TestCase):
         self.assertIsNone(my_list.nth_node(-2))
         self.assertIsNone(my_list.nth_node(-3))
 
-        # check that the nth node function raises an exception for negative n
-        # with self.assertRaises(IndexError):
-        #     my_list.nth_node(-1)  # n cannot be negative
-        # with self.assertRaises(IndexError):
-        #     my_list.nth_node(-2)  # n cannot be negative
-        # with self.assertRaises(IndexError):
-        #     my_list.nth_node(-3)  # n cannot be negative
-
     def test_large_n(self):
         # create a linked list with some nodes
         my_list = LinkedList()
@@ -218,14 +146,6 @@ class TestLinkedList(TestCase):
         self.assertIsNone(my_list.nth_node(4))
         self.assertIsNone(my_list.nth_node(5))
         self.assertIsNone(my_list.nth_node(6))
-
-        # # check that the nth node function raises an exception for n larger than the list length
-        # with self.assertRaises(IndexError):
-        #     my_list.nth_node(4)  # n cannot be greater than 3
-        # with self.assertRaises(IndexError):
-        #     my_list.nth_node(5)  # n cannot be greater than 3
-        # with self.assertRaises(IndexError):
-        #     my_list.nth_node(6)  # n cannot be greater than 3
 
     def test_one_node_list(self):
         # create a linked list with one node
@@ -238,11 +158,157 @@ class TestLinkedList(TestCase):
         self.assertIsNone(my_list.nth_node(0))
         self.assertIsNone(my_list.nth_node(2))
 
-        # check that the nth node function raises an exception for any other n
-        # with self.assertRaises(IndexError):
-        #     my_list.nth_node(0)  # n cannot be zero
-        # with self.assertRaises(IndexError):
-        #     my_list.nth_node(2)  # n cannot be greater than 1
+    def test_index_found(self):
+        # Test if the function returns the correct index for a value that is in the list
+        # The first node has value 1 and index 0
+        self.assertEqual(self.list.index(1), 0)
+        # The third node has value 3 and index 2
+        self.assertEqual(self.list.index(3), 2)
+
+    def test_index_not_found(self):
+        # Test if the function returns -1 for a value that is not in the list
+        # There is no node with value 5 in the list
+        self.assertEqual(self.list.index(5), -1)
+        # There is no node with value -1 in the list
+        self.assertEqual(self.list.index(-1), -1)
+
+    def test_index_empty_list(self):
+        # Test if the function returns -1 for an empty list
+        empty_list = LinkedList()  # Create an empty linked list
+        # There is no node in the empty list
+        self.assertEqual(empty_list.index(1), -1)
+
+    def test_index_invalid_argument(self):
+        # Test if the function raises a TypeError for an invalid argument
+        with self.assertRaises(TypeError):
+            # None is not a valid value to search for in the list
+            self.list.index(None)
+
+    def test_index_first_last(self):
+        # Test if the function returns the correct index for the first and last node in the list
+        # The first node has value 1 and index 0
+        self.assertEqual(self.list.index(1), 0)
+        # The last node has value 4 and index 3
+        self.assertEqual(self.list.index(3), 2)
+
+    def test_index_duplicate_value(self):
+        # Test if the function returns the index of the first occurrence of a duplicate value in the list
+        # Add another node with value 2 at the end of the list
+        self.list.insert(2)
+        # The first node with value 2 has index 1
+        self.assertEqual(self.list.index(2), 1)
+
+    def test_index_single_node(self):
+        # Test if the function returns 0 for a single-node list
+        single_list = LinkedList()  # Create a single-node linked list
+        single_list.insert(5)  # Add a node with value 5
+        # The only node has value 5 and index 0
+        self.assertEqual(single_list.index(5), 0)
+
+    def test_index_non_integer_value_string(self):
+        # Test if the function works for non-integer values in the list
+        # Add a node with a string value at the end of the list
+        with self.assertRaises(TypeError):
+            # None is not a valid value to search for in the list
+            self.list.insert('a')
+
+    def test_index_non_integer_value_boolean(self):
+        # Add a node with a boolean value at the end of the list
+        with self.assertRaises(TypeError):
+            self.list.insert(True)
+
+        # # # The node with vst.index(True), 3)
+
+    def test_index_negative_value(self):
+        # Test if the function works for negative values in the list
+        # Add a node with a negative value at the end of the list
+        with self.assertRaises(ValueError):
+            self.list.insert(-3)
+        # The node with value st.index(-3), 3)
+
+    def test_index_zero_value(self):
+        # Test if the function works for zero value in the list
+        # Add a node with zero value at the end of the list
+        self.list.insert(0)
+
+        # The node with value 0 has index 5
+        self.assertEqual(self.list.index(0), 3)
+
+    def test_index_large_value(self):
+        # Test if the function works for large values in the list
+        # Add a node with a large value at the end of the list
+        self.list.insert(1000000)
+
+        # The node with value 1000000 has index 6
+        self.assertEqual(self.list.index(1000000), 3)
+
+    def test_index_transposition_valid(self):
+        # test the function with a valid value that exists in the list
+        index = self.list.index_transposition(3)
+        # the value 30 should be swapped with 20 and return index 1
+        self.assertEqual(index, 1)
+        # self.assertEqual(self.list.get_name, 20) # the value at index 2 should be 20 after swapping
+
+    def test_index_transposition_invalid(self):
+        # test the function with an invalid value that does not exist in the list
+        index = self.list.index_transposition(60)
+        # the function should return -1 if the value is not found
+        self.assertEqual(index, -1)
+
+    def test_index_transposition_type_error(self):
+        # test the function with an invalid type of value that is not an integer
+        # the function should raise a TypeError if the value is not an integer
+        with self.assertRaises(TypeError):
+            self.list.index_transposition("hello")
+
+    def test_index_transposition_head(self):
+        # test the function with the value at the head of the list
+        index = self.list.index_transposition(1)
+        # the function should return 0 if the value is at the head of the list
+        self.assertEqual(index, 0)
+        # the value at the head of the list should not
+
+    def test_index_transposition_empty(self):
+        # test the function with an empty list
+        empty_list = LinkedList()  # create an empty list
+        index = empty_list.index_transposition(10)
+        # the function should return -1 if the list is empty
+        self.assertEqual(index, -1)
+        self.assertIsNone(empty_list.head)  # the list should remain empty
+
+    def test_index_transposition_tail(self):
+        # test the function with the value at the tail of the list
+        index = self.list.index_transposition(3)
+        # the function should return 3 if the value is at the tail of the list
+        self.assertEqual(index, 1)
+
+    def test_index_transposition_negative(self):
+        # test the function with a negative value that does not exist
+        # in the list
+        index = self.list.index_transposition(-10)
+        # the function should return -1 if the value is not found
+        self.assertEqual(index, -1)
+
+    def test_index_transposition_none(self):
+        # test the function with a None value that is not valid
+        # the function should raise a TypeError if the value is None
+        with self.assertRaises(TypeError):
+            self.list.index_transposition(None)
+
+    def test_index_transposition_duplicate(self):
+        # test the function with a value that appears more than once in the list
+        self.list.insert(40)  # add another 30 to the end of the list
+        index = self.list.index_transposition(40)
+        # the function should return 1 if the value is the first occurrence of 30 in the list
+        self.assertEqual(index, 2)
+
+    def test_index_transposition_zero(self):
+        # test the function with a zero value that exists in the list
+        self.list.insert(0)  # add a zero to the end of the list
+        index = self.list.index_transposition(0)
+
+        # the function should return 4 if the value is zero at the end of the list
+        self.assertEqual(index, 2)
 
     # def test_random_n(self):
     #     # create a linked list with some random nodes

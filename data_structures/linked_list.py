@@ -21,6 +21,9 @@ class LinkedList:
             yield temp_head
             temp_head = temp_head.next
 
+    def is_empty(self):
+        return self.head is None and self.tail is None
+
     def show_node_list(self):
         temp_head = self.head
         while temp_head is not None:
@@ -51,8 +54,45 @@ class LinkedList:
 
         return None
 
+    def index(self, value: int) -> int:
+        if value is None or not isinstance(value, int):
+            # raise an exception if val is not None and not an int
+            raise TypeError("val must be of int data type")
+
+        temp_head = self.head
+        idx = 0
+        while temp_head is not None:
+            if temp_head.val == value:
+                return idx
+            temp_head = temp_head.next
+            idx += 1
+        return -1
+
+    def index_transposition(self, value: int) -> int:
+        if self.head is None and self.tail is None:
+            # if self.is_empty is True:
+            return -1
+
+        if value is None or not isinstance(value, int):
+            raise TypeError("val must be of int data type")
+
+        if self.head.val == value:
+            return 0
+
+        prev = None
+        current = self.head
+        idx = 0
+        while current is not None:
+            if current.val == value:
+                prev.val, current.val = current.val, prev.val
+                return idx-1
+            prev = current
+            current = current.next
+            idx += 1
+        return -1
+
     def insert(self, value):
-        if value is not None and not isinstance(value, int):
+        if value is None or not isinstance(value, int) or isinstance(value, bool):
             # raise an exception if val is not None and not an int
             raise TypeError("val must be of int data type")
 
