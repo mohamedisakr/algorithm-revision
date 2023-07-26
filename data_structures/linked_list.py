@@ -44,8 +44,8 @@ class LinkedList:
             return self.head.val
 
         temp_head = self.head
-        for i in range(n):
-            if i+1 == n:
+        for i in range(1, n+1):
+            if i == n:
                 return temp_head.val
             temp_head = temp_head.next
 

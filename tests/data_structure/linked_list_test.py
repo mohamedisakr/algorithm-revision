@@ -147,7 +147,7 @@ class TestLinkedList(TestCase):
         my_list.insert(2)
         my_list.insert(3)
 
-        my_list.show_node_list()
+        # my_list.show_node_list()
 
         # check that the nth node function returns the correct node data
         self.assertEqual(my_list.nth_node(1), 1)  # first node
@@ -161,7 +161,7 @@ class TestLinkedList(TestCase):
         my_list.insert(2)
         my_list.insert(3)
 
-        my_list.show_node_list()
+        # my_list.show_node_list()
 
         self.assertIsNone(my_list.nth_node(0))
         self.assertIsNone(my_list.nth_node(4))
