@@ -4,13 +4,20 @@ from data_structures.node import Node
 
 
 class LinkedList:
-    def __init__(self):
+
+    # def __init__(self):
+    def __init__(self, iter_values=None):
+
         self.head = None
         self.tail = None
         self.size = 0
         self.max_val = -math.inf
         self.min_val = math.inf
         self.total_sum = 0
+
+        if iter_values is not None:
+            for item in iter_values:
+                self.insert(item)
 
     def __len__(self) -> int:
         return self.size

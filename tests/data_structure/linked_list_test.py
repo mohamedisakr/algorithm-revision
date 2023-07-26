@@ -17,6 +17,15 @@ class TestLinkedList(TestCase):
         self.assertEqual(self.list.tail.val, 3, "The tail value should be 3")
         self.assertEqual(len(self.list), 3, "The length should be 3")
 
+    def test_init_fill_with_array(self):
+        arr = [1, 2, 3]
+        self.list = LinkedList(arr)
+
+        # This method tests the initialization of the linked list
+        self.assertEqual(self.list.head.val, 1, "The head value should be 1")
+        self.assertEqual(self.list.tail.val, 3, "The tail value should be 3")
+        self.assertEqual(len(self.list), 3, "The length should be 3")
+
     def test_insert(self):
         # This method tests the insert method of the linked list
         self.list.insert(4)
