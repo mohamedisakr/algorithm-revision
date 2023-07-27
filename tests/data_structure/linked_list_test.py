@@ -4,14 +4,13 @@ from data_structures.linked_list import LinkedList
 
 class TestLinkedListDataIntegrity(TestCase):
     def test_verify_empty_defaults(self):
-        # self.empty_list = LinkedList()
         self.empty_list = LinkedList()
         self.assertEqual(self.empty_list.size, 0)
+        self.assertTrue(self.empty_list.is_empty())
         self.assertIsNone(self.empty_list.head)
         self.assertIsNone(self.empty_list.tail)
 
     def test_verify_1_element(self):
-        # self.one_element_list = LinkedList([1])
         self.one_element_list = LinkedList([1])
         self.assertEqual(self.one_element_list.size, 1)
         self.assertIsNotNone(self.one_element_list.head)
@@ -20,7 +19,6 @@ class TestLinkedListDataIntegrity(TestCase):
                          self.one_element_list.tail)
 
     def test_verify_2_elements(self):
-        # self.one_element_list = LinkedList([1])
         self.two_element_list = LinkedList([1, 2])
         self.assertEqual(self.two_element_list.size, 2)
         self.assertIsNotNone(self.two_element_list.head)
@@ -679,7 +677,7 @@ class TestLinkedList(TestCase):
         self.assertEqual(self.list.nth_node_back(5), 1)  # same as first node
 
     # ------------- is_identical ---------------
-    # '''
+
     def test_is_identical_empty_lists(self):
         # Create two empty linked lists
         list1 = LinkedList()
@@ -720,7 +718,86 @@ class TestLinkedList(TestCase):
         # Check that is_identical returns False for lists with different data types
         self.assertFalse(list1.is_identical(list2))
 
-    # '''
+   # ------------- delete_rear ---------------
+
+    def test_delete_rear_empty(self):
+        # test deleting from an empty list
+        lst = LinkedList()
+        lst.delete_rear()
+        self.assertIsNone(lst.head)
+        self.assertIsNone(lst.tail)
+        self.assertEqual(lst.size, 0)
+
+    def test_delete_rear_one(self):
+        # test deleting from a list with one element
+        lst = LinkedList([1])
+        lst.delete_rear()
+        self.assertIsNone(lst.head)
+        self.assertIsNone(lst.tail)
+        self.assertEqual(lst.size, 0)
+
+    def test_delete_rear_many(self):
+        # test deleting from a list with many elements
+        lst = LinkedList([1, 2, 3, 4, 5])
+        lst.delete_rear()
+        self.assertEqual(lst.head.val, 1)
+        self.assertEqual(lst.tail.val, 4)
+        self.assertEqual(lst.size, 4)
+
+    def test_delete_rear_negative(self):
+        # test deleting from a list with negative values
+        # lst = LinkedList([-1, -2, -3, -4, -5])
+        lst = LinkedList([1, 2, 3, 4, 5])
+        lst.delete_rear()
+        self.assertEqual(lst.head.val, 1)
+        self.assertEqual(lst.tail.val, 4)
+        self.assertEqual(lst.size, 4)
+
+    def test_delete_rear_none(self):
+        # test deleting from a list with None values
+        with self.assertRaises(TypeError):
+            lst = LinkedList([None, 1, None, 2, None])
+            # self.list.nth_node_back('a')
+        # lst.delete_rear()
+        # self.assertEqual(lst.head.val, None)
+        # self.assertEqual(lst.tail.val, 2)
+        # self.assertEqual(lst.size, 4)
+
+    def test_delete_rear_sorted(self):
+        # test deleting from a sorted list
+        lst = LinkedList([1, 2, 3, 4, 5])
+        lst.delete_rear()
+        self.assertEqual(lst.head.val, 1)
+        self.assertEqual(lst.tail.val, 4)
+        self.assertEqual(lst.size, 4)
+
+    def test_delete_rear_reverse_sorted(self):
+        # test deleting from a reverse sorted list
+        lst = LinkedList([5, 4, 3, 2, 1])
+        lst.delete_rear()
+        self.assertEqual(lst.head.val, 5)
+        self.assertEqual(lst.tail.val, 2)
+        self.assertEqual(lst.size, 4)
+
+    def test_delete_rear_mixed(self):
+        # test deleting from a list with mixed types
+        with self.assertRaises(TypeError):
+            lst = LinkedList([1, "a", True, None, 3.14])
+        # with self.assertRaises(TypeError):
+        #     lst.delete_rear()
+        # self.assertEqual(lst.head.val, 1)
+        # self.assertEqual(lst.tail.val, None)
+        # self.assertEqual(lst.size, 4)
+
+    def test_delete_rear_duplicate(self):
+        # test deleting from a list with duplicate values
+        lst = LinkedList([1, 2, 2, 3, 3])
+        lst.delete_rear()
+        # lst.show_node_list()
+        self.assertEqual(lst.head.val, 1)
+        # self.assertEqual(lst.tail.val, 3)
+        self.assertEqual(lst.size, 4)
+    ''''''
 
 
 if __name__ == "__main__":

@@ -146,6 +146,30 @@ class LinkedList:
         self.size -= 1
         temp_head = None
 
+    def delete_rear(self):
+        if self.is_empty():
+            return
+        if self.size == 1:
+            self.head = None
+            self.tail = None
+            self.size = 0
+            self.max_val = -math.inf
+            self.min_val = math.inf
+            self.total_sum = 0
+            return
+
+        previous = None
+        current = self.head
+
+        while current is not None:
+            if current.val == self.tail.val:
+                del_value = current.val
+                self.tail = previous
+            previous, current = current, current.next
+        self.size -= 1
+        self.total_sum -= del_value
+        current = None
+
     def insert(self, value):
         if value is None or not isinstance(value, int) or isinstance(value, bool):
             # raise an exception if val is not None and not an int
