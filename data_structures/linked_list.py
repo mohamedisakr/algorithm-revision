@@ -169,3 +169,18 @@ class LinkedList:
         self.max_val = max(self.max_val, value)
         self.min_val = min(self.min_val, value)
         self.total_sum += value
+
+    def is_identical(self, linked_list) -> bool:
+        if self.size != linked_list.size:
+            return False
+
+        temp_head = self.head
+        other_head = linked_list.head
+
+        for i in range(self.size):
+            if temp_head.val != other_head.val:
+                return False
+            temp_head = temp_head.next
+            other_head = other_head.next
+
+        return True

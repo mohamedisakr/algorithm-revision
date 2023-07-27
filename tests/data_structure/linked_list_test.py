@@ -678,6 +678,50 @@ class TestLinkedList(TestCase):
         # test the function with input equal to list size
         self.assertEqual(self.list.nth_node_back(5), 1)  # same as first node
 
+    # ------------- is_identical ---------------
+    # '''
+    def test_is_identical_empty_lists(self):
+        # Create two empty linked lists
+        list1 = LinkedList()
+        list2 = LinkedList()
+
+        # Check that is_identical returns True for empty lists
+        self.assertTrue(list1.is_identical(list2))
+
+    def test_is_identical_equal_lists(self):
+        # Create two linked lists with identical data
+        list1 = LinkedList([1, 2, 3])
+        list2 = LinkedList([1, 2, 3])
+
+        # Check that is_identical returns True for equal lists
+        self.assertTrue(list1.is_identical(list2))
+
+    def test_is_identical_different_lengths(self):
+        # Create two linked lists with different lengths
+        list1 = LinkedList([1, 2, 3])
+        list2 = LinkedList([1, 2])
+
+        # Check that is_identical returns False for lists with different lengths
+        self.assertFalse(list1.is_identical(list2))
+
+    def test_is_identical_different_values(self):
+        # Create two linked lists with different values
+        list1 = LinkedList([1, 2, 3])
+        list2 = LinkedList([4, 5, 6])
+
+        # Check that is_identical returns False for lists with different values
+        self.assertFalse(list1.is_identical(list2))
+
+    def test_is_identical_different_data_types(self):
+        # Create two linked lists with different data types
+        list1 = LinkedList([1, 2, 3])
+        list2 = LinkedList([10, 20, 30])
+
+        # Check that is_identical returns False for lists with different data types
+        self.assertFalse(list1.is_identical(list2))
+
+    # '''
+
 
 if __name__ == "__main__":
     # main()
