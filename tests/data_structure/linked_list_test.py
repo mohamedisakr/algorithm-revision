@@ -598,6 +598,86 @@ class TestLinkedList(TestCase):
     #     with self.assertRaises(TypeError):
     #         my_list.delete_front()
 
+    # ------------- nth_node_back --------------------
+
+    def test_nth_node_back_valid(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+        # test the function with valid inputs
+        self.assertEqual(self.list.nth_node_back(1), 5)  # last node
+        self.assertEqual(self.list.nth_node_back(3), 3)  # third node from back
+        self.assertEqual(self.list.nth_node_back(5), 1)  # first node
+
+    def test_nth_node_back_invalid(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+        # test the function with invalid inputs
+        self.assertIsNone(self.list.nth_node_back(0))  # n should be positive
+        # n should not exceed list size
+        self.assertIsNone(self.list.nth_node_back(6))
+        # n should not be negative
+        self.assertIsNone(self.list.nth_node_back(-1))
+
+    def test_nth_node_back_empty(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+        # test the function with an empty list
+        empty_list = LinkedList()
+        self.assertIsNone(empty_list.nth_node_back(1))  # no nodes in list
+
+    # def setUp(self):
+    #     # create a sample linked list with 5 nodes
+    #     self.list = LinkedList([1, 2, 3, 4, 5])
+
+    def test_nth_node_back_valid_1(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+        # test the function with valid inputs
+        self.assertEqual(self.list.nth_node_back(1), 5)  # last node
+        self.assertEqual(self.list.nth_node_back(3), 3)  # third node from back
+        self.assertEqual(self.list.nth_node_back(5), 1)  # first node
+
+    def test_nth_node_back_invalid_1(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+        # test the function with invalid inputs
+        self.assertIsNone(self.list.nth_node_back(0))  # n should be positive
+        # n should not exceed list size
+        self.assertIsNone(self.list.nth_node_back(6))
+        # n should not be negative
+        self.assertIsNone(self.list.nth_node_back(-1))
+
+    def test_nth_node_back_empty_1(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+        # test the function with an empty list
+        empty_list = LinkedList()
+        self.assertIsNone(empty_list.nth_node_back(1))  # no nodes in list
+
+    def test_nth_node_back_none(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+        # test the function with None as input
+        # self.assertIsNone(self.list.nth_node_back(None)) # n should be an integer
+        with self.assertRaises(TypeError):
+            self.list.nth_node_back(None)
+
+    def test_nth_node_back_non_integer(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+        # test the function with non-integer inputs
+        # self.assertIsNone(self.list.nth_node_back('a'))  # n should be an integer
+        # self.assertIsNone(self.list.nth_node_back(3.5))  # n should be an integer
+
+        with self.assertRaises(TypeError):
+            self.list.nth_node_back('a')
+            self.list.nth_node_back(3.5)
+
+    def test_nth_node_back_large_small(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+        # test the function with very large or very small inputs
+        # n should not exceed list size
+        self.assertIsNone(self.list.nth_node_back(1000000))
+        self.assertIsNone(self.list.nth_node_back(-1000000))
+        # n should not be negative
+
+    def test_nth_node_back_equal_size(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+        # test the function with input equal to list size
+        self.assertEqual(self.list.nth_node_back(5), 1)  # same as first node
+
 
 if __name__ == "__main__":
     # main()

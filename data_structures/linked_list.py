@@ -46,9 +46,18 @@ class LinkedList:
     def sum_total(self):
         return self.total_sum
 
+    def nth_node_back(self, n):
+        # if self.is_empty() or n > self.size:
+        #     return None
+        return self.nth_node(self.size-n+1)
+
     def nth_node(self, n):
+        if n is None or not isinstance(n, int):
+            raise TypeError("n must be of int data type")
+
         if self.head is None or n < 1 or n > self.size:
             return None
+
         if n == 1:
             return self.head.val
 
