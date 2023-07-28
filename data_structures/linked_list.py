@@ -131,6 +131,7 @@ class LinkedList:
     def delete_front(self):
         if self.is_empty():
             return
+
         if self.size == 1:
             self.head = None
             self.tail = None
@@ -143,12 +144,14 @@ class LinkedList:
         temp_head = self.head
         self.head = temp_head.next
         self.total_sum -= temp_head.val
+        self.min_val = self.head.val
         self.size -= 1
         temp_head = None
 
     def delete_rear(self):
         if self.is_empty():
             return
+
         if self.size == 1:
             self.head = None
             self.tail = None
@@ -160,12 +163,51 @@ class LinkedList:
 
         previous = None
         current = self.head
+        del_value = 0
 
         while current is not None:
             if current.val == self.tail.val:
                 del_value = current.val
                 self.tail = previous
             previous, current = current, current.next
+        self.size -= 1
+        self.total_sum -= del_value
+        self.max_val = self.tail.val
+        current = None
+
+    def delete_nth(self, n):
+        if n is None or not isinstance(n, int):
+            raise TypeError("n must be of int data type")
+
+        if self.is_empty() or n < 1 or n > self.size:
+            return
+
+        if n == 1:
+            self.delete_front()
+            return
+
+        if n == self.size:
+            self.delete_rear()
+            return
+
+        previous = None
+        current = self.head
+        del_value = 0
+
+        for i in range(1, n+1):
+            if i == n:
+                if current is not None and previous is None:
+                    del_value = current.val
+                    # current = current.next
+                    self.head = current.next
+                    current = None
+                    self.size -= 1
+                    return
+                else:
+                    del_value = current.val
+                    previous.next = current.next
+            previous, current = current, current.next
+
         self.size -= 1
         self.total_sum -= del_value
         current = None
