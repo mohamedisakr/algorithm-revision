@@ -959,9 +959,28 @@ class TestLinkedList(TestCase):
         self.assertEqual(self.list.size, 4)
         self.assertEqual(self.list.total_sum, 12)
 
-    # def tearDown(self):
-    #     # delete the sample linked list after testing
-    #     del self.ll
+    def test_delete_value_all_occurrences(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+
+        # test if the function deletes all occurrences of a value in the list
+        self.list.delete_value(2)
+        self.assertEqual(self.list.head.val, 1)
+        self.assertEqual(self.list.head.next.val, 3)
+        self.assertEqual(self.list.head.next.next.val, 4)
+        self.assertEqual(self.list.head.next.next.next.val, 5)
+        self.assertEqual(self.list.size, 4)
+        self.assertEqual(self.list.total_sum, 13)
+
+    def test_delete_value_multiple_nodes_in_a_row(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+
+        # test if the function deletes multiple nodes in a row that have the same value
+        self.list.delete_value(2)
+        self.assertEqual(self.list.head.val, 1)
+        self.assertEqual(self.list.head.next.val, 3)
+        self.assertEqual(self.list.size, 4)
+        self.assertEqual(self.list.total_sum, 13)
+        self.assertEqual(self.list.head.next.next.val, 4)
 
 
 if __name__ == "__main__":
