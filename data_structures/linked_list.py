@@ -55,7 +55,8 @@ class LinkedList:
         if n is None or not isinstance(n, int):
             raise TypeError("n must be of int data type")
 
-        if self.head is None or n < 1 or n > self.size:
+        # if self.head is None or n < 1 or n > self.size:
+        if self.is_empty() or n < 1 or n > self.size:
             return None
 
         if n == 1:
@@ -211,6 +212,41 @@ class LinkedList:
         self.size -= 1
         self.total_sum -= del_value
         current = None
+
+    def delete_value(self, value):
+        if value is None or not isinstance(value, int) or isinstance(value, bool):
+            # raise an exception if val is not None and not an int
+            raise TypeError("val must be of int data type")
+
+        if value is not None and value < 0:
+            # raise an exception if val is not None and negative
+            raise ValueError("val must be non-negative")
+
+        if self.is_empty():  # or value < 1 or value > self.size:
+            return
+
+        if value == self.head.val:
+            self.delete_front()
+            return
+
+        if value == self.tail.val:
+            self.delete_rear()
+            return
+
+        previous = None
+        current = self.head
+        del_value = 0
+
+        while current is not None:
+            if current.val == value:
+                del_value = current.val
+                previous.next = current.next
+                self.size -= 1
+                self.total_sum -= del_value
+                current = None
+                return
+
+            previous, current = current, current.next
 
     def insert(self, value):
         if value is None or not isinstance(value, int) or isinstance(value, bool):

@@ -909,6 +909,60 @@ class TestLinkedList(TestCase):
         self.list.delete_nth(2)
         self.assertEqual(self.list.total_sum, 10)
 
+    # --------------------- delete_value ------------------------
+
+    # def setUp(self):
+    #     # create a sample linked list for testing
+    #     self.ll = LinkedList([1, 2, 3, 4, 5])
+
+    def test_delete_value_head(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+
+        # test if the function deletes the head node correctly
+        self.list.delete_value(1)
+        self.assertEqual(self.list.head.val, 2)
+        self.assertEqual(self.list.size, 4)
+        self.assertEqual(self.list.total_sum, 14)
+
+    def test_delete_value_tail(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+
+        # test if the function deletes the tail node correctly
+        self.list.delete_value(5)
+        self.assertEqual(self.list.tail.val, 4)
+        self.assertEqual(self.list.size, 4)
+        self.assertEqual(self.list.total_sum, 10)
+
+    def test_delete_value_not_found(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+
+        # test if the function does nothing when the value is not found
+        self.list.delete_value(6)
+        self.assertEqual(self.list.size, 5)
+        self.assertEqual(self.list.total_sum, 15)
+
+    def test_delete_value_invalid_input(self):
+        # test if the function raises an exception for invalid inputs
+        with self.assertRaises(TypeError):
+            self.list.delete_value(None)
+        with self.assertRaises(TypeError):
+            self.list.delete_value("a")
+        with self.assertRaises(ValueError):
+            self.list.delete_value(-1)
+
+    def test_delete_value_middle(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+
+        # test if the function deletes a middle node correctly
+        self.list.delete_value(3)
+        self.assertEqual(self.list.head.next.next.val, 4)
+        self.assertEqual(self.list.size, 4)
+        self.assertEqual(self.list.total_sum, 12)
+
+    # def tearDown(self):
+    #     # delete the sample linked list after testing
+    #     del self.ll
+
 
 if __name__ == "__main__":
     # main()
