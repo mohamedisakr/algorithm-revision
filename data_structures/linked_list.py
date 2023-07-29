@@ -221,12 +221,25 @@ class LinkedList:
         current = None
         # '''
 
+    def delete_nth_simple(self, n):
+        if n is None or not isinstance(n, int):
+            raise TypeError("n must be of int data type")
+
+        if self.is_empty() or n < 1 or n > self.size:
+            raise ValueError(f"This #{n}th node does not exist")
+
+        before_nth = self.get_nth_node(n-1)
+        nth_node = before_nth.next
+        after_nth = nth_node.next
+        before_nth.next = after_nth
+        nth_node = None
+
     def delete_nth(self, n):
         if n is None or not isinstance(n, int):
             raise TypeError("n must be of int data type")
 
         if self.is_empty() or n < 1 or n > self.size:
-            return
+            raise ValueError(f"This #{n}th node does not exist")
 
         if n == 1:
             self.delete_front()

@@ -906,14 +906,15 @@ class TestLinkedList(TestCase):
         self.list = LinkedList([1, 2, 3, 4, 5])
 
         # delete an invalid node and check if nothing changes
-        self.list.delete_nth(10)
-        self.assertEqual(self.list.size, 5)
+        with self.assertRaises(ValueError):
+            self.list.delete_nth(10)
+        # self.assertEqual(self.list.size, 5)
 
     def test_delete_nth_empty(self):
         self.list = LinkedList([1, 2, 3, 4, 5])
         # create an empty linked list and try to delete any node
         empty_list = LinkedList()
-        empty_list.delete_nth(1)
+
         self.assertIsNone(empty_list.head)
         self.assertIsNone(empty_list.tail)
         self.assertEqual(empty_list.size, 0)
@@ -921,10 +922,13 @@ class TestLinkedList(TestCase):
         self.assertEqual(empty_list.min_val, math.inf)
         self.assertEqual(empty_list.total_sum, 0)
 
+        with self.assertRaises(ValueError):
+            empty_list.delete_nth(1)
+
     def test_delete_nth_negative(self):
         self.list = LinkedList([1, 2, 3, 4, 5])
         # try to delete a negative node and check if nothing changes
-        self.list.delete_nth(-1)
+
         self.assertEqual(self.list.head.val, 1)
         self.assertEqual(self.list.tail.val, 5)
         self.assertEqual(self.list.size, 5)
@@ -932,16 +936,21 @@ class TestLinkedList(TestCase):
         self.assertEqual(self.list.min_val, 1)
         self.assertEqual(self.list.total_sum, 15)
 
+        with self.assertRaises(ValueError):
+            self.list.delete_nth(-1)
+
     def test_delete_nth_zero(self):
         self.list = LinkedList([1, 2, 3, 4, 5])
         # try to delete the zeroth node and check if nothing changes
-        self.list.delete_nth(0)
         self.assertEqual(self.list.head.val, 1)
         self.assertEqual(self.list.tail.val, 5)
         self.assertEqual(self.list.size, 5)
         self.assertEqual(self.list.max_val, 5)
         self.assertEqual(self.list.min_val, 1)
         self.assertEqual(self.list.total_sum, 15)
+
+        with self.assertRaises(ValueError):
+            self.list.delete_nth(0)
 
     def test_delete_nth_one_element(self):
         self.list = LinkedList([1, 2, 3, 4, 5])
