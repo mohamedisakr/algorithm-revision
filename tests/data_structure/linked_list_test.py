@@ -998,6 +998,125 @@ class TestLinkedList(TestCase):
         self.list.delete_nth(2)
         self.assertEqual(self.list.total_sum, 10)
 
+    # ------------------------- delete_nth_simple --------------------------------
+
+    def test_delete_nth_simple_first(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+        # delete the first node and check if the head is updated
+        self.list.delete_nth_simple(1)
+        self.assertEqual(self.list.size, 4)
+        self.assertEqual(self.list.head.val, 2)
+
+    def test_delete_nth_simple_last(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+
+        # delete the last node and check if the tail is updated
+        self.list.delete_nth_simple(4)
+        self.assertEqual(self.list.tail.val, 5)
+
+    def test_delete_nth_simple_middle(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+
+        # delete a middle node and check if the size is reduced
+        self.list.delete_nth_simple(2)
+        self.assertEqual(self.list.size, 4)
+
+    def test_delete_nth_simple_invalid(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+
+        # delete an invalid node and check if nothing changes
+        with self.assertRaises(ValueError):
+            self.list.delete_nth_simple(10)
+        # self.assertEqual(self.list.size, 5)
+
+    def test_delete_nth_simple_empty(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+        # create an empty linked list and try to delete any node
+        empty_list = LinkedList()
+
+        self.assertIsNone(empty_list.head)
+        self.assertIsNone(empty_list.tail)
+        self.assertEqual(empty_list.size, 0)
+        self.assertEqual(empty_list.max_val, -math.inf)
+        self.assertEqual(empty_list.min_val, math.inf)
+        self.assertEqual(empty_list.total_sum, 0)
+
+        with self.assertRaises(ValueError):
+            empty_list.delete_nth_simple(1)
+
+    def test_delete_nth_simple_negative(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+        # try to delete a negative node and check if nothing changes
+
+        self.assertEqual(self.list.head.val, 1)
+        self.assertEqual(self.list.tail.val, 5)
+        self.assertEqual(self.list.size, 5)
+        self.assertEqual(self.list.max_val, 5)
+        self.assertEqual(self.list.min_val, 1)
+        self.assertEqual(self.list.total_sum, 15)
+
+        with self.assertRaises(ValueError):
+            self.list.delete_nth_simple(-1)
+
+    def test_delete_nth_simple_zero(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+        # try to delete the zeroth node and check if nothing changes
+        self.assertEqual(self.list.head.val, 1)
+        self.assertEqual(self.list.tail.val, 5)
+        self.assertEqual(self.list.size, 5)
+        self.assertEqual(self.list.max_val, 5)
+        self.assertEqual(self.list.min_val, 1)
+        self.assertEqual(self.list.total_sum, 15)
+
+        with self.assertRaises(ValueError):
+            self.list.delete_nth_simple(0)
+
+    def test_delete_nth_simple_one_element(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+        # create a linked list with one element and delete it
+        one_element_list = LinkedList([10])
+        one_element_list.delete_nth_simple(1)
+        self.assertIsNone(one_element_list.head)
+        self.assertIsNone(one_element_list.tail)
+        self.assertEqual(one_element_list.size, 0)
+        self.assertEqual(one_element_list.max_val, -math.inf)
+        self.assertEqual(one_element_list.min_val, math.inf)
+        self.assertEqual(one_element_list.total_sum, 0)
+
+    # def setUp(self):
+    #     # create a sample linked list with values 1, 2, 3, 4, 5
+    #     self.list = LinkedList([1, 2, 3, 4, 5])
+
+    def test_delete_nth_simple_max_val(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+        # delete the node with the maximum value and check if the max_val is updated
+        self.list.delete_nth_simple(5)
+        self.assertEqual(self.list.max_val, 4)
+
+        # delete the node with the new maximum value and check if the max_val is updated
+        self.list.delete_nth_simple(4)
+        self.assertEqual(self.list.max_val, 3)
+
+    def test_delete_nth_simple_min_val(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+        # delete the node with the minimum value and check if the min_val is updated
+        self.list.delete_nth_simple(1)
+        self.assertEqual(self.list.min_val, 2)
+
+        # delete the node with the new minimum value and check if the min_val is updated
+        self.list.delete_nth_simple(1)
+        self.assertEqual(self.list.min_val, 3)
+
+    def test_delete_nth_simple_total_sum(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+        # delete a node and check if the total_sum is reduced by its value
+        self.list.delete_nth_simple(3)
+        self.assertEqual(self.list.total_sum, 12)
+
+        # delete another node and check if the total_sum is reduced by its value
+        self.list.delete_nth_simple(2)
+        self.assertEqual(self.list.total_sum, 10)
+
     # --------------------- delete_value ------------------------
 
     # def setUp(self):

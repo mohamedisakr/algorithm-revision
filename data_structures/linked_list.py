@@ -228,11 +228,23 @@ class LinkedList:
         if self.is_empty() or n < 1 or n > self.size:
             raise ValueError(f"This #{n}th node does not exist")
 
+        if n == 1:
+            self.delete_front()
+            return
+
+        if n == self.size:
+            self.delete_rear()
+            return
+
         before_nth = self.get_nth_node(n-1)
         nth_node = before_nth.next
+        del_value = nth_node.val
         after_nth = nth_node.next
         before_nth.next = after_nth
         nth_node = None
+
+        self.size -= 1
+        self.total_sum -= del_value
 
     def delete_nth(self, n):
         if n is None or not isinstance(n, int):
