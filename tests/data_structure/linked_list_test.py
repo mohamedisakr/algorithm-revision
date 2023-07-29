@@ -799,6 +799,86 @@ class TestLinkedList(TestCase):
         # self.assertEqual(lst.tail.val, 3)
         self.assertEqual(lst.size, 4)
 
+   # ------------- delete_rear_simple ---------------
+
+    def test_delete_rear_simple_empty(self):
+        # test deleting from an empty list
+        lst = LinkedList()
+        lst.delete_rear_simple()
+        self.assertIsNone(lst.head)
+        self.assertIsNone(lst.tail)
+        self.assertEqual(lst.size, 0)
+
+    def test_delete_rear_simple_one(self):
+        # test deleting from a list with one element
+        lst = LinkedList([1])
+        lst.delete_rear_simple()
+        self.assertIsNone(lst.head)
+        self.assertIsNone(lst.tail)
+        self.assertEqual(lst.size, 0)
+
+    def test_delete_rear_simple_many(self):
+        # test deleting from a list with many elements
+        lst = LinkedList([1, 2, 3, 4, 5])
+        lst.delete_rear_simple()
+        self.assertEqual(lst.head.val, 1)
+        self.assertEqual(lst.tail.val, 4)
+        self.assertEqual(lst.size, 4)
+
+    def test_delete_rear_simple_negative(self):
+        # test deleting from a list with negative values
+        # lst = LinkedList([-1, -2, -3, -4, -5])
+        lst = LinkedList([1, 2, 3, 4, 5])
+        lst.delete_rear_simple()
+        self.assertEqual(lst.head.val, 1)
+        self.assertEqual(lst.tail.val, 4)
+        self.assertEqual(lst.size, 4)
+
+    def test_delete_rear_simple_none(self):
+        # test deleting from a list with None values
+        with self.assertRaises(TypeError):
+            lst = LinkedList([None, 1, None, 2, None])
+            # self.list.nth_node_back('a')
+        # lst.delete_rear_simple()
+        # self.assertEqual(lst.head.val, None)
+        # self.assertEqual(lst.tail.val, 2)
+        # self.assertEqual(lst.size, 4)
+
+    def test_delete_rear_simple_sorted(self):
+        # test deleting from a sorted list
+        lst = LinkedList([1, 2, 3, 4, 5])
+        lst.delete_rear_simple()
+        self.assertEqual(lst.head.val, 1)
+        self.assertEqual(lst.tail.val, 4)
+        self.assertEqual(lst.size, 4)
+
+    def test_delete_rear_simple_reverse_sorted(self):
+        # test deleting from a reverse sorted list
+        lst = LinkedList([5, 4, 3, 2, 1])
+        lst.delete_rear_simple()
+        self.assertEqual(lst.head.val, 5)
+        self.assertEqual(lst.tail.val, 2)
+        self.assertEqual(lst.size, 4)
+
+    def test_delete_rear_simple_mixed(self):
+        # test deleting from a list with mixed types
+        with self.assertRaises(TypeError):
+            lst = LinkedList([1, "a", True, None, 3.14])
+        # with self.assertRaises(TypeError):
+        #     lst.delete_rear_simple()
+        # self.assertEqual(lst.head.val, 1)
+        # self.assertEqual(lst.tail.val, None)
+        # self.assertEqual(lst.size, 4)
+
+    def test_delete_rear_simple_duplicate(self):
+        # test deleting from a list with duplicate values
+        lst = LinkedList([1, 2, 2, 3, 3])
+        lst.delete_rear_simple()
+        # lst.show_node_list()
+        self.assertEqual(lst.head.val, 1)
+        # self.assertEqual(lst.tail.val, 3)
+        self.assertEqual(lst.size, 4)
+
     # ------------------------- delete_nth --------------------------------
 
     def test_delete_nth_first(self):

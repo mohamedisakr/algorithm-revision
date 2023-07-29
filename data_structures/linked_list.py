@@ -70,6 +70,25 @@ class LinkedList:
 
         return None
 
+    def get_nth_node(self, n):
+        if n is None or not isinstance(n, int):
+            raise TypeError("n must be of int data type")
+
+        # if self.head is None or n < 1 or n > self.size:
+        if self.is_empty() or n < 1 or n > self.size:
+            return None
+
+        if n == 1:
+            return self.head
+
+        temp_head = self.head
+        for i in range(1, n+1):
+            if i == n:
+                return temp_head
+            temp_head = temp_head.next
+
+        return None
+
     def index(self, value: int) -> int:
         if value is None or not isinstance(value, int):
             # raise an exception if val is not None and not an int
@@ -149,10 +168,35 @@ class LinkedList:
         self.size -= 1
         temp_head = None
 
+    def delete_rear_simple(self):
+        if self.is_empty():
+            return
+        if self.size == 1:
+            self.delete_front()
+            return
+
+        second_last = self.get_nth_node(self.size-1)
+        self.delete_nth(self.size)
+        self.tail = second_last
+        second_last.next = None
+
     def delete_rear(self):
         if self.is_empty():
             return
 
+        if self.size <= 1:
+            self.delete_front()
+            return
+
+        # del_value = self.tail.val
+        # second_last = self.nth_node(self.size-1)
+        # self.tail = second_last
+        # second_last.next = None
+        # self.size -= 1
+        # self.total_sum -= del_value
+        # self.max_val = self.tail.val
+
+        # '''
         if self.size == 1:
             self.head = None
             self.tail = None
@@ -175,6 +219,7 @@ class LinkedList:
         self.total_sum -= del_value
         self.max_val = self.tail.val
         current = None
+        # '''
 
     def delete_nth(self, n):
         if n is None or not isinstance(n, int):
