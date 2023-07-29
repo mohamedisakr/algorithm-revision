@@ -1311,6 +1311,119 @@ class TestLinkedList(TestCase):
         # self.assertEqual(lst.head.next.next.next.val, 2.0)
         # self.assertEqual(lst.head.next.next.next.next, None)
 
+    # --------------- reverse ---------------------------
+    '''
+    def test_reverse(self):
+        # create some linked lists for testing
+        self.list1 = LinkedList([1, 2, 3, 4, 5])  # 1 -> 2 -> 3 -> 4 -> 5
+        self.list2 = LinkedList([10])  # 10
+        self.list3 = LinkedList([])  # empty
+        reversed_ll = LinkedList([5, 4, 3, 2, 1])
+
+        # check if the reverse function returns the expected reversed linked list
+        # 5 -> 4 -> 3 -> 2 -> 1
+        self.assertEqual(self.list1.reverse(), LinkedList([5, 4, 3, 2, 1]))
+        self.assertEqual(self.list2.reverse(), LinkedList([10]))  # 10
+        self.assertEqual(self.list3.reverse(), LinkedList([]))  # empty
+
+    def test_reverse_empty(self):
+        # create some linked lists for testing
+        self.list3 = LinkedList([])  # empty
+        # check if the reverse function handles an empty linked list correctly
+        # self.assertEqual(self.list3.reverse(), LinkedList([]))  # empty
+
+        # actual = self.list3.reverse()
+        expected = LinkedList([])
+        self.assertEqual(self.list3.reverse(), expected)  # empty
+    '''
+
+    # def test_reverse_new(self):
+    #     self.list = LinkedList([1, 2, 3, 4, 5])
+
+    #     print()
+    #     self.list.show_node_list()
+    #     print()
+
+    #     # reverse the linked list
+    #     self.list.reverse()
+
+    #     print()
+    #     self.list.show_node_list()
+    #     print()
+    #     print(f"linked list head : {self.list.head.val}")
+    #     print(f"linked list tail : {self.list.tail.val}")
+
+    #     # check that the head node has value 5
+    #     self.assertEqual(self.list.head.val, 5)
+
+    #     # check that the tail node has value 1
+    #     self.assertEqual(self.list.tail.val, 1)
+
+    #     # check that the size of the list is still 5
+    #     self.assertEqual(self.list.size, 5)
+
+    # def test_reverse_new(self):
+    #     self.list = LinkedList([1, 2, 3, 4, 5])
+
+    #     print()
+    #     self.list.show_node_list()
+    #     print()
+
+    #     # reverse the linked list
+    #     self.list.reverse()  # use the same name as in the linked list class
+
+    #     print()
+    #     self.list.show_node_list()
+    #     print()
+    #     print(f"linked list head : {self.list.head.val}")
+    #     print(f"linked list tail : {self.list.tail.val}")
+
+    #     # check that the head node has value 5
+    #     self.assertEqual(self.list.head.val, 5)
+
+    #     # check that the tail node has value 1
+    #     self.assertEqual(self.list.tail.val, 1)
+
+    #     # check that the size of the list is still 5
+    #     self.assertEqual(self.list.size, 5)
+
+    # # check that the values of the nodes are in reverse order
+    # values = []
+    # current = self.list.head
+    # while current:
+    #     values.append(current.val)
+    #     current = current.next
+    # self.assertEqual(values, [5, 4, 3, 2, 1])
+
+    def test_empty_list_1(self):
+        # test reversing an empty list
+        lst = LinkedList()
+        lst.reverse()
+        self.assertIsNone(lst.head)  # check that the head is None
+
+    def test_single_element_list(self):
+        # test reversing a list with one element
+        lst = LinkedList([1])
+        lst.reverse()
+        self.assertEqual(lst.head.val, 1)  # check that the head val is 1
+        self.assertIsNone(lst.head.next)  # check that the head next is None
+
+    def test_multiple_elements_list(self):
+        # test reversing a list with multiple elements
+        lst = LinkedList([1, 2, 3, 4, 5])
+        lst.reverse()
+        self.assertEqual(lst.head.val, 5)  # check that the head val is 5
+        # check that the head next val is 4
+        self.assertEqual(lst.head.next.val, 4)
+        # check that the head next next val is 3
+        self.assertEqual(lst.head.next.next.val, 3)
+        # check that the head next next next val is 2
+        self.assertEqual(lst.head.next.next.next.val, 2)
+        # check that the head next next next next val is 1
+        self.assertEqual(lst.head.next.next.next.next.val, 1)
+        # check that the head next next next next next is None
+        self.assertIsNone(lst.head.next.next.next.next.next)
+
 
 if __name__ == "__main__":
     # main()

@@ -34,6 +34,48 @@ class LinkedList:
             yield temp_head
             temp_head = temp_head.next
 
+    def __eq__(self, other):
+        # check if other is a linked list
+        if not isinstance(other, LinkedList):
+            return False
+
+        # compare the sizes of the linked lists
+        if self.size != other.size:
+            return False
+
+        # compare the values of the nodes in the linked lists
+        current1 = self.head
+        current2 = other.head
+        while current1 and current2:
+            if current1.val != current2.val:
+                return False
+            current1 = current1.next
+            current2 = current2.next
+
+        # return True if no differences are found
+        return True
+
+    # def __eq__(self, other):
+    #     # check if other is a linked list
+    #     if not isinstance(other, LinkedList):
+    #         return False
+
+    #     # compare the sizes of the linked lists
+    #     if self.size != other.size:
+    #         return False
+
+    #     # compare the values of the nodes in the linked lists
+    #     current1 = self.head
+    #     current2 = other.head
+    #     while current1 and current2:
+    #         if current1.val != current2.val:
+    #             return False
+    #         current1 = current1.next
+    #         current2 = current2.next
+
+    #     # return True if no differences are found
+    #     return True
+
     def is_empty(self):
         return self.head is None and self.tail is None
 
@@ -386,3 +428,15 @@ class LinkedList:
             previous, current = current, current.next
             previous.val, current.val = current.val, previous.val
             current = current.next
+
+    def reverse(self):
+        prev = None
+        current = self.head
+
+        while current is not None:
+            next_node = current.next
+            current.next = prev
+            prev = current
+            current = next_node
+        self.head = prev
+        # self.tail = prev
