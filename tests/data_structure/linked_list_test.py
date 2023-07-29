@@ -1190,6 +1190,127 @@ class TestLinkedList(TestCase):
         self.assertEqual(self.list.total_sum, 13)
         self.assertEqual(self.list.head.next.next.val, 4)
 
+    # -------------------- swap_pairs ---------------------------
+
+    def test_empty_list_swap(self):
+        # Create an empty list
+        lst = LinkedList()
+        # Swap pairs
+        lst.swap_pairs()
+        # Check if the list is still empty
+        self.assertEqual(lst.head, None)
+
+    def test_one_element(self):
+        # Create a list with one element
+        lst = LinkedList([1])
+        # Swap pairs
+        lst.swap_pairs()
+        # Check if the list is unchanged
+        self.assertEqual(lst.head.val, 1)
+        self.assertEqual(lst.head.next, None)
+        # self.assertEqual(lst.tail, None)
+
+    def test_even_elements(self):
+        # Create a list with even number of elements
+        lst = LinkedList([1, 2, 3, 4])
+        # Swap pairs
+        lst.swap_pairs()
+        # Check if the list is swapped correctly
+        self.assertEqual(lst.head.val, 2)
+        self.assertEqual(lst.head.next.val, 1)
+        self.assertEqual(lst.head.next.next.val, 4)
+        self.assertEqual(lst.head.next.next.next.val, 3)
+        self.assertEqual(lst.head.next.next.next.next, None)
+
+    def test_odd_elements(self):
+        # Create a list with odd number of elements
+        lst = LinkedList([1, 2, 3, 4, 5])
+        # Swap pairs
+        lst.swap_pairs()
+        # Check if the list is swapped correctly
+        self.assertEqual(lst.head.val, 2)
+        self.assertEqual(lst.head.next.val, 1)
+        self.assertEqual(lst.head.next.next.val, 4)
+        self.assertEqual(lst.head.next.next.next.val, 3)
+        self.assertEqual(lst.head.next.next.next.next.val, 5)
+        self.assertEqual(lst.head.next.next.next.next.next, None)
+
+    # # TODO: postpone when handling circular
+    # def test_circular_list(self):
+    #     # Create a circular list
+    #     lst = LinkedList([1, 2, 3, 4])
+    #     lst.tail.next = lst.head
+    #     # Swap pairs
+    #     lst.swap_pairs()
+    #     # Check if the list is swapped correctly and still circular
+    #     self.assertEqual(lst.head.val, 2)
+    #     self.assertEqual(lst.head.next.val, 1)
+    #     self.assertEqual(lst.head.next.next.val, 4)
+    #     self.assertEqual(lst.head.next.next.next.val, 3)
+    #     self.assertEqual(lst.head.next.next.next.next, lst.head)
+
+    def test_duplicate_elements(self):
+        # Create a list with duplicate elements
+        lst = LinkedList([1, 1, 2, 2])
+        # Swap pairs
+        lst.swap_pairs()
+        # Check if the list is swapped correctly
+        self.assertEqual(lst.head.val, 1)
+        self.assertEqual(lst.head.next.val, 1)
+        self.assertEqual(lst.head.next.next.val, 2)
+        self.assertEqual(lst.head.next.next.next.val, 2)
+        self.assertEqual(lst.head.next.next.next.next, None)
+
+    # def test_invalid_input(self):
+    #     # Create a list with an invalid input
+    #     lst = LinkedList(["a", "b", "c", "d"])
+    #     # Swap pairs
+    #     with self.assertRaises(TypeError):
+    #         lst.swap_pairs()
+
+    def test_reverse_list(self):
+        # Create a list in reverse order
+        lst = LinkedList([4, 3, 2, 1])
+        # Swap pairs
+        lst.swap_pairs()
+        # Check if the list is swapped correctly
+        self.assertEqual(lst.head.val, 3)
+        self.assertEqual(lst.head.next.val, 4)
+        self.assertEqual(lst.head.next.next.val, 1)
+        self.assertEqual(lst.head.next.next.next.val, 2)
+        self.assertEqual(lst.head.next.next.next.next, None)
+
+    def test_negative_elements(self):
+        # Create a list with negative elements
+        # lst = LinkedList([-1, -2, -3, -4])
+
+        with self.assertRaises(ValueError):
+            lst = LinkedList([-1, -2, -3, -4])
+
+        # with self.assertRaises(ValueError):
+        #     # Swap pairs
+        #     lst.swap_pairs()
+        # # Check if the list is swapped correctly
+        # self.assertEqual(lst.head.val, -2)
+        # self.assertEqual(lst.head.next.val, -1)
+        # self.assertEqual(lst.head.next.next.val, -4)
+        # self.assertEqual(lst.head.next.next.next.val, -3)
+        # self.assertEqual(lst.head.next.next.next.next, None)
+
+    def test_mixed_types(self):
+        # Create a list with mixed types
+        with self.assertRaises(TypeError):
+            lst = LinkedList([1, "a", 2.0, True])
+            # Swap pairs
+
+        # lst.swap_pairs()
+        # # Check if the list is swapped correctly
+        # self.assertEqual(lst.head.val, "a")
+        # self.assertEqual(lst.head.next.val, 1)
+        # self.assertEqual(lst.head.next.next.val, True)
+        # self.assertEqual(lst.head.next.next.next.val, 2.0)
+        # self.assertEqual(lst.head.next.next.next.next, None)
+
 
 if __name__ == "__main__":
     # main()

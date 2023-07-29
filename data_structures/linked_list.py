@@ -14,9 +14,16 @@ class LinkedList:
         self.min_val = math.inf
         self.total_sum = 0
 
+        # if not all(isinstance(item, int) for item in iter_values):
+        #     raise TypeError("all elements in array must be of int data type")
+
         if iter_values is not None:
             for item in iter_values:
+                # try:
                 self.insert(item)
+                # except:
+                #     TypeError()
+                #     ValueError()
 
     def __len__(self) -> int:
         return self.size
@@ -319,13 +326,23 @@ class LinkedList:
             previous, current = current, current.next
 
     def insert(self, value):
-        if value is None or not isinstance(value, int) or isinstance(value, bool):
+        if value is None or not isinstance(value, int) or isinstance(value, bool) or isinstance(value, str):
             # raise an exception if val is not None and not an int
             raise TypeError("val must be of int data type")
 
         if value is not None and value < 0:
             # raise an exception if val is not None and negative
             raise ValueError("val must be non-negative")
+
+        '''
+        if item < 0:
+            raise ValueError(
+                f"{item} must be of positive integer")
+
+        if not isinstance(item, int):
+            raise TypeError(
+                f"all elements in {iter_values} must be of int data type")
+        '''
 
         new_node = Node(value)
 
@@ -354,3 +371,18 @@ class LinkedList:
             temp_head, other_head = temp_head.next, other_head.next
 
         return True
+
+    def swap_pairs(self):
+        if self.is_empty():
+            return
+
+        if self.size == 1:
+            return
+
+        previous = None
+        current = self.head
+
+        while current and current.next:
+            previous, current = current, current.next
+            previous.val, current.val = current.val, previous.val
+            current = current.next
