@@ -448,3 +448,65 @@ class LinkedList:
                 self.total_sum -= cur_value
             else:
                 previous, current = current, current.next
+
+    # def insert_sorted(self, value):
+    #     if value is None or not isinstance(value, int) or \
+    #             isinstance(value, (bool, str)):
+    #         raise TypeError("val must be of int data type")
+
+    #     if value is not None and value < 0:
+    #         raise ValueError("val must be non-negative")
+
+    #     new_node = Node(value)
+    #     previous = None
+    #     current = self.head
+
+    #     # 6 -> 5 -> 4 -> 3 -> 2 -> 1
+    #     # empty linked list
+    #     if self.is_empty():  # self.head is None:
+    #         self.head = new_node
+    #         self.tail = new_node
+    #     else:
+    #         while current:
+    #             if previous is None:
+    #                 if current.val > new_node.val:
+    #                     current, new_node = new_node, current
+    #                     self.head = new_node
+    #                     new_node.next = current
+
+    #     self.size += 1
+    #     self.max_val = max(self.max_val, value)
+    #     self.min_val = min(self.min_val, value)
+    #     self.total_sum += value
+
+    def insert_sorted(self, value):
+        new_node = Node(value)
+
+        # check if the list is empty
+        if self.is_empty():
+            self.head = new_node
+            self.tail = new_node
+            self.size += 1
+            return
+
+        previous = None
+        current = self.head
+        # find the correct position for the new node
+        while current:
+            if current.val > new_node.val:
+                break  # found the position
+            previous = current
+            current = current.next
+
+        # insert the new node between previous and current
+        new_node.next = current
+
+        if previous is None:  # inserted at the beginning
+            self.head = new_node
+        else:
+            previous.next = new_node
+
+        # update the tail and size attributes
+        if current is None:  # inserted at the end
+            self.tail = new_node
+        self.size += 1

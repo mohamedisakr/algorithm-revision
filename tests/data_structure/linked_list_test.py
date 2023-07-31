@@ -1546,6 +1546,160 @@ class TestLinkedList(TestCase):
     #     # This should raise a TypeError because the elements are not comparable
     #     self.assertRaises(TypeError, self.list.delete_even_positions)
 
+    # ----------------------- insert_sorted ---------------------
+    def test_insert_sorted_smaller(self):
+        arr = [3, 2, 4, 5, 1]
+        self.list = LinkedList()
+
+        for i, item in enumerate(arr):
+            self.list.insert_sorted(item)
+
+        self.list.insert_sorted(0)
+
+        # check if the new node is inserted at the beginning
+        self.assertEqual(self.list.head.val, 0)
+        self.assertEqual(self.list.size, 6)  # check if the size is updated
+
+    # define a method that tests the insert_sorted method with a value larger than the maximum
+
+    def test_insert_sorted_larger(self):
+        arr = [3, 2, 4, 5, 1]
+        self.list = LinkedList()
+
+        for i, item in enumerate(arr):
+            self.list.insert_sorted(item)
+
+        self.list.insert_sorted(6)
+
+        # check if the new node is inserted at the end
+        self.assertEqual(self.list.tail.val, 6)
+        self.assertEqual(self.list.size, 6)  # check if the size is updated
+
+    # define a method that tests the insert_sorted method with a value in between
+
+    def test_insert_sorted_middle(self):
+        self.list = LinkedList([3, 2, 4, 5, 1])
+
+        self.list.insert_sorted(3)
+        # check if the new node is inserted at the correct position
+        self.assertEqual(self.list.head.next.next.val, 3)
+        self.assertEqual(self.list.size, 6)  # check if the size is updated
+
+    def test_insert_sorted(self):
+        arr = [3, 2, 4, 5, 1]
+        self.list = LinkedList()
+
+        for i, item in enumerate(arr):
+            self.list.insert_sorted(item)
+
+        self.list.insert_sorted(0)
+
+        # check if the new node is inserted at the beginning
+        self.assertEqual(self.list.head.val, 0)
+        self.assertEqual(self.list.tail.val, 5)
+        self.assertEqual(self.list.size, 6)  # check if the size is updated
+
+    # define a method that tests the insert_sorted method with an invalid value
+
+    def test_insert_sorted_invalid(self):
+        with self.assertRaises(TypeError):  # check if a TypeError is raised
+            self.list.insert_sorted("a")
+
+    def test_insert_sorted_empty(self):
+        arr = [3, 2, 4, 5, 1]
+        self.list = LinkedList()
+
+        for i, item in enumerate(arr):
+            self.list.insert_sorted(item)
+
+        # self.list = LinkedList() # create an empty list
+        self.list.insert_sorted(0)  # insert a value
+
+        # check if the value is inserted as the head
+        self.assertEqual(self.list.head.val, 0)
+        # check if the value is inserted as the tail
+        self.assertEqual(self.list.tail.val, 5)
+        self.assertEqual(self.list.size, 6)  # check if the size is updated
+
+# define a method that tests the insert_sorted method with a single-node list
+
+    def test_insert_sorted_single(self):
+        self.list = LinkedList()  # create a single-node list
+
+        self.list.insert_sorted(1)  # insert a smaller value
+        self.list.insert_sorted(0)  # insert a smaller value
+
+        # check if the value is inserted as the head
+        self.assertEqual(self.list.head.val, 0)
+        # check if the tail is unchanged
+        self.assertEqual(self.list.tail.val, 1)
+        self.assertEqual(self.list.size, 2)  # check if the size is updated
+
+        self.list.insert_sorted(2)  # insert a larger value
+
+        # check if the head is unchanged
+        self.assertEqual(self.list.head.val, 0)
+        # check if the value is inserted as the tail
+        self.assertEqual(self.list.tail.val, 2)
+        self.assertEqual(self.list.size, 3)  # check if the size is updated
+
+# define a method that tests the insert_sorted method with a duplicate value
+
+    def test_insert_sorted_duplicate(self):
+        arr = [1, 2, 3]
+        self.list = LinkedList()
+
+        for i, item in enumerate(arr):
+            self.list.insert_sorted(item)
+
+        self.list.insert_sorted(2)  # insert a duplicate value
+
+        # check if the value is inserted after the first occurrence of 2
+        self.assertEqual(self.list.head.next.next.val, 2)
+        self.assertEqual(self.list.size, 4)  # check if the size is updated
+
+    # define a method that tests the insert_sorted method with a None value
+
+    def test_insert_sorted_none(self):
+        arr = [3, 2, 4, 5, 1]
+        self.list = LinkedList()
+
+        for i, item in enumerate(arr):
+            self.list.insert_sorted(item)
+
+        with self.assertRaises(TypeError):  # check if a TypeError is raised
+            self.list.insert_sorted(None)  # insert a None value
+
+    # define a method that tests the insert_sorted method with a non-integer value
+    def test_insert_sorted_non_integer(self):
+        arr = [3, 2, 4, 5, 1]
+        self.list = LinkedList()
+
+        for i, item in enumerate(arr):
+            self.list.insert_sorted(item)
+
+        with self.assertRaises(TypeError):  # check if a TypeError is raised
+            self.list.insert_sorted(3.14)  # insert a non-integer value
+
+    # define a method that tests the insert_sorted method with a large value
+    def test_insert_sorted_large(self):
+        arr = [3, 2, 4, 5, 1]
+        self.list = LinkedList()
+
+        for i, item in enumerate(arr):
+            self.list.insert_sorted(item)
+
+        self.list.insert_sorted(1000000)  # insert a large value
+
+        # check if the value is inserted as the tail
+        self.assertEqual(self.list.tail.val, 1000000)
+        self.assertEqual(self.list.size, 6)  # check if the size is updated
+
+    # define a method that tests the insert_sorted method with a negative value
+    def test_insert_sorted_negative(self):
+        with self.assertRaises(ValueError):
+            self.list.insert_sorted(-1)  # insert a negative value
+
 
 if __name__ == "__main__":
     # main()
