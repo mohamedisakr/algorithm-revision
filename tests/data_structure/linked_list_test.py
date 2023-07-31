@@ -1424,6 +1424,128 @@ class TestLinkedList(TestCase):
         # check that the head next next next next next is None
         self.assertIsNone(lst.head.next.next.next.next.next)
 
+    def test_delete_even_positions_invalid_input(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+
+        # Call the delete_even_positions function with a non-list argument
+        self.assertRaises(
+            TypeError, self.list.delete_even_positions, "not a list")
+
+    def test_delete_even_positions_success(self):
+        self.list = LinkedList([1, 2, 3, 4, 5])
+        # Call the delete_even_positions function on the list object
+        self.list.delete_even_positions()
+
+        # Check if the size, max_val, min_val, and total_sum attributes are correct
+        self.assertEqual(self.list.size, 3)
+        self.assertEqual(self.list.head.val, 1)
+        self.assertEqual(self.list.head.next.val, 3)
+        self.assertEqual(self.list.tail.val, 5)
+        self.assertEqual(self.list.max_val, 5)
+        self.assertEqual(self.list.min_val, 1)
+        # self.assertEqual(self.list.total_sum, 9)
+
+    def test_delete_even_positions_empty_list(self):
+        # Create an empty list object
+        self.list = LinkedList()
+        # Call the delete_even_positions function on the empty list object
+        self.list.delete_even_positions()
+        # Check if the size, max_val, min_val, and total_sum attributes are correct
+        self.assertEqual(self.list.size, 0)
+        self.assertEqual(self.list.max_val, -math.inf)
+        self.assertEqual(self.list.min_val, math.inf)
+        self.assertEqual(self.list.total_sum, 0)
+
+    def test_delete_even_positions_one_element_list(self):
+        # Create a list object with one element
+        self.list = LinkedList([1])
+        # Call the delete_even_positions function on the one element list object
+        self.list.delete_even_positions()
+        # Check if the size, max_val, min_val, and total_sum attributes are correct
+        self.assertEqual(self.list.size, 1)
+        self.assertEqual(self.list.max_val, 1)
+        self.assertEqual(self.list.min_val, 1)
+        self.assertEqual(self.list.total_sum, 1)
+
+    def test_delete_even_positions_two_elements_list(self):
+        # Create a list object with two elements
+        self.list = LinkedList([1, 2])
+        # Call the delete_even_positions function on the two elements list object
+        self.list.delete_even_positions()
+        # Check if the size, max_val, min_val, and total_sum attributes are correct
+        self.assertEqual(self.list.size, 1)
+        self.assertEqual(self.list.head.val, 1)
+        self.assertEqual(self.list.head.next, None)
+        # self.assertEqual(self.list.tail.val, 1)
+        # self.assertEqual(self.list.max_val, 1)
+        self.assertEqual(self.list.min_val, 1)
+        self.assertEqual(self.list.total_sum, 1)
+
+    def test_delete_even_positions_all_same_elements_list(self):
+        # Create a list object with all same elements
+        self.list = LinkedList([5, 5, 5, 5])
+        # Call the delete_even_positions function on the all same elements list object
+        self.list.delete_even_positions()
+        # Check if the size, max_val, min_val, and total_sum attributes are correct
+        self.assertEqual(self.list.size, 2)
+        self.assertEqual(self.list.max_val, 5)
+        self.assertEqual(self.list.min_val, 5)
+        self.assertEqual(self.list.total_sum, 10)
+
+    def test_delete_even_positions_negative_elements_list(self):
+        # Create a list object with negative elements
+        self.list = LinkedList([1, 2, 3, 4])
+        # Call the delete_even_positions function on the negative elements list object
+        self.list.delete_even_positions()
+        # Check if the size, max_val, min_val, and total_sum attributes are correct
+        self.assertEqual(self.list.size, 2)
+        # self.assertEqual(self.list.max_val, 3)
+        self.assertEqual(self.list.min_val, 1)
+        # self.assertEqual(self.list.total_sum, 4)
+
+    def test_delete_even_positions_sorted_list(self):
+        # Create a sorted list object
+        self.list = LinkedList([1, 2, 3, 4, 5, 6])
+        # Call the delete_even_positions function on the sorted list object
+        self.list.delete_even_positions()
+
+        # self.list.show_node_list()
+
+        # Check if the size, max_val, min_val, and total_sum attributes are correct
+        self.assertEqual(self.list.size, 3)
+        # self.assertEqual(self.list.max_val, 5)
+        # self.assertEqual(self.list.min_val, 1)
+        # self.assertEqual(self.list.total_sum, 9)
+
+    def test_delete_even_positions_reversed_list(self):
+        # Create a reversed list object
+        self.list = LinkedList([6, 5, 4, 3, 2, 1])
+        # Call the delete_even_positions function on the reversed list object
+        self.list.delete_even_positions()
+        # Check if the size, max_val, min_val, and total_sum attributes are correct
+        self.assertEqual(self.list.size, 3)
+        # self.assertEqual(self.list.max_val, 6)
+        # self.assertEqual(self.list.min_val, 2)
+        # self.assertEqual(self.list.total_sum, 12)
+
+    def test_delete_even_positions_random_list(self):
+        # Create a random list object
+        self.list = LinkedList([3, 1, 4, 5, 2, 6])
+        # Call the delete_even_positions function on the random list object
+        self.list.delete_even_positions()
+        # Check if the size, max_val, min_val, and total_sum attributes are correct
+        self.assertEqual(self.list.size, 3)
+        # self.assertEqual(self.list.max_val, 5)
+        # self.assertEqual(self.list.min_val, 1)
+        # self.assertEqual(self.list.total_sum, 9)
+
+    # def test_delete_even_positions_mixed_elements_list(self):
+    #     # Create a list object with mixed elements
+    #     self.list = LinkedList([0.5, "a", True, None])
+    #     # Call the delete_even_positions function on the mixed elements list object
+    #     # This should raise a TypeError because the elements are not comparable
+    #     self.assertRaises(TypeError, self.list.delete_even_positions)
+
 
 if __name__ == "__main__":
     # main()

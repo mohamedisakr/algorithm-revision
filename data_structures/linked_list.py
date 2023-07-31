@@ -376,16 +376,6 @@ class LinkedList:
             # raise an exception if val is not None and negative
             raise ValueError("val must be non-negative")
 
-        '''
-        if item < 0:
-            raise ValueError(
-                f"{item} must be of positive integer")
-
-        if not isinstance(item, int):
-            raise TypeError(
-                f"all elements in {iter_values} must be of int data type")
-        '''
-
         new_node = Node(value)
 
         # empty linked list
@@ -440,3 +430,21 @@ class LinkedList:
             current = next_node
         self.head = prev
         # self.tail = prev
+
+    def delete_even_positions(self):
+        previous = None
+        current = self.head
+        cur_value = 0
+
+        for i in range(1, self.size+1):
+            if i % 2 == 0:  # and current is not None:  # and current.next is not None:
+                cur_value = current.val
+                if current.next:
+                    previous.next = current.next
+                else:
+                    previous.next = None
+                    self.tail = previous
+                self.size -= 1
+                self.total_sum -= cur_value
+            else:
+                previous, current = current, current.next
