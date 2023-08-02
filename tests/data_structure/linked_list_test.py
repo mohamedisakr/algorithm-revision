@@ -1713,6 +1713,119 @@ class TestLinkedList(TestCase):
         with self.assertRaises(ValueError):
             self.list.insert_sorted(-1)  # insert a negative value
 
+    # ----------------- swap_head_tail -----------------------
+    '''
+    def test_empty_list_swap_head_tail(self):
+        # create an empty linked list
+        ll = LinkedList()
+        # try to swap head and tail
+        ll.swap_head_tail()
+        # check that the head and tail are still None
+        self.assertIsNone(ll.head)
+        self.assertIsNone(ll.tail)
+
+    def test_one_element_list(self):
+        # create a linked list with one element
+        ll = LinkedList([1])
+        # try to swap head and tail
+        ll.swap_head_tail()
+        # check that the head and tail are still the same node
+        self.assertEqual(ll.head, ll.tail)
+        self.assertEqual(ll.head.val, 1)
+
+    def test_two_element_list(self):
+        # create a linked list with two elements
+        ll = LinkedList([1, 2])
+        # try to swap head and tail
+        ll.swap_head_tail()
+
+        print()
+        ll.show_node_list()
+        print()
+
+        # check that the head and tail are swapped
+        self.assertEqual(ll.head.val, 2)
+        self.assertEqual(ll.tail.val, 1)
+        # check that the next and previous pointers are updated correctly
+        # self.assertIsNone(ll.head.previous)
+        # self.assertEqual(ll.head.next, ll.tail)
+        # self.assertEqual(ll.tail.previous, ll.head)
+
+        # self.assertIsNone(ll.tail.next)
+        self.assertIsNotNone(ll.tail.next)
+
+    def test_multiple_element_list_by_me(self):
+        # create a linked list with multiple elements
+        # 1 -> 2 -> 3 -> 4
+        # 4 -> 2 -> 3 -> 1
+        ll = LinkedList([1, 2, 3, 4])
+        # try to swap head and tail
+        ll.swap_head_tail()
+
+        print()
+        ll.show_node_list()
+        print()
+
+        # check that the head and tail are swapped
+        self.assertEqual(ll.head.val, 4)
+        self.assertEqual(ll.head.next.val, 2)
+
+        self.assertEqual(ll.tail.val, 1)
+        # check that the next and previous pointers are updated correctly
+        # self.assertIsNone(ll.head.previous)
+        print(f'tail.next : {ll.tail.next}')
+
+        self.assertEqual(ll.head.next.val, 2)
+        # self.assertEqual(ll.tail.previous.val, 3)
+        self.assertIsNone(ll.tail.next)
+        '''
+
+    def test_empty_list_swap_head_tail(self):
+        # create an empty linked list
+        ll = LinkedList()
+        # try to swap head and tail
+        ll.swap_head_tail()
+        # check that the head and tail are still None
+        self.assertIsNone(ll.head)
+        self.assertIsNone(ll.tail)
+
+    def test_one_element_list(self):
+        # create a linked list with one element
+        ll = LinkedList([1])
+        # try to swap head and tail
+        ll.swap_head_tail()
+        # check that the head and tail are still the same node
+        self.assertEqual(ll.head, ll.tail)
+        self.assertEqual(ll.head.val, 1)
+
+    def test_two_element_list(self):
+        # create a linked list with two elements
+        ll = LinkedList([1, 2])
+        # try to swap head and tail
+        ll.swap_head_tail()
+        # check that the head and tail are swapped
+        self.assertEqual(ll.tail.val, 1)
+        self.assertEqual(ll.head.val, 2)
+        # check that the next and previous pointers are updated correctly
+        # self.assertIsNone(ll.head.previous)
+        self.assertEqual(ll.head.next, ll.tail)
+        # self.assertEqual(ll.tail.previous, ll.head)
+        self.assertIsNone(ll.tail.next)
+
+    def test_multiple_element_list(self):
+        # create a linked list with multiple elements
+        ll = LinkedList([1, 2, 3, 4])
+        # try to swap head and tail
+        ll.swap_head_tail()
+        # check that the head and tail are swapped
+        self.assertEqual(ll.head.val, 4)
+        self.assertEqual(ll.tail.val, 1)
+        # check that the next and previous pointers are updated correctly
+        # self.assertIsNone(ll.head.previous)
+        self.assertEqual(ll.head.next.val, 2)
+        # self.assertEqual(ll.tail.previous.val, 3)
+        self.assertIsNone(ll.tail.next)
+
 
 if __name__ == "__main__":
     # main()

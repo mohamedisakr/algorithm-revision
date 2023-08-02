@@ -513,3 +513,94 @@ class LinkedList:
         if current is None:  # inserted at the end
             self.tail = new_node
         self.size += 1
+
+    # def swap_head_tail(self):
+    #     if not self.head or not self.head.next:
+    #         return
+    #     # start with the self.head's next pointer (the second node in the list)
+    #     pp = self.head.next
+
+    #     # walk the pointer down the list, each time grasping
+    #     #  the next node's "next" pointer until we reach a node
+    #     #  whose 'next' is None. When that happens, `pp` will hold the
+    #     #  pointer to the last node in the list
+    #     while pp and pp.next:
+    #         pp = pp.next
+
+    #     # swap the pointer held in self.head with pp
+    #     self.head, pp = pp, self.head
+    #     # tmp = self.head
+    #     # self.head = pp
+    #     # pp = tmp
+
+    #     # save new self.head's next pointer to be the old self.head's next
+    #     self.head.next = pp.next
+
+    #     # and finally, terminate the list.
+    #     pp.next = None
+
+    # def swap_head_tail(self):
+    #     # check if the list is empty or has one element
+    #     if self.head is None or self.head == self.tail:
+    #         return  # nothing to swap
+
+    #     # store the original head node in a temporary variable
+    #     temp = self.head
+
+    #     # update the head node to be the tail node
+    #     self.head = self.tail
+
+    #     # update the previous pointer of the new head node to be None
+    #     self.head.previous = None
+    #     # update the next pointer of the new head node to be the next node of the original head node
+    #     self.head.next = temp.next
+    #     # update the tail node to be the original head node
+    #     self.tail = temp
+    #     # update the next pointer of the new tail node to be None
+    #     self.tail.next = None
+    #     # update the previous pointer of the new tail node to be the previous node of the original tail node
+    #     self.tail.previous = self.head.previous
+
+    # def swap_head_tail(self):
+    #     if self.head == self.tail:
+    #         return
+
+    #     prev = None
+    #     cur = self.head
+
+    #     while cur != self.tail:
+    #         prev = cur
+    #         cur = cur.next
+
+    #     prev.next = None
+    #     cur.next = self.head.next
+
+    #     self.head.next = None
+    #     self.tail.next = cur
+
+    #     tmp = self.head
+    #     self.head = self.tail
+    #     self.tail = tmp
+
+    # def swap_head_tail(self):
+    #     # 1 -> 2 -> 3 -> 4
+    #     # 4 -> 2 -> 3 -> 1
+    #     # self.head, self.tail = self.tail, self.head
+
+    #     old_head = self.head
+    #     old_tail = self.tail
+
+    #     prev = None
+    #     curr = self.head
+
+    #     while curr:
+    #         if prev is None:
+    #             temp_head = self.head
+    #             self.head = old_tail
+    #             old_tail.next = temp_head.next
+    #             # old_tail.next = temp_head.next
+    #         prev = curr
+    #         curr = curr.next
+
+    #     if curr is None:  # inserted at the end
+    #         self.tail = old_head
