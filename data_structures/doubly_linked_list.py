@@ -1,4 +1,5 @@
 import math
+from data_structures.node_doubly import Node
 
 
 class DoublyLinkedList:
@@ -6,17 +7,11 @@ class DoublyLinkedList:
         self.head = None
         self.tail = None
         self.size = 0
-        self.max_val = -math.inf
-        self.min_val = math.inf
-        self.total_sum = 0
 
-        # if not all(isinstance(item, int) for item in iter_values):
-        #     raise TypeError("all elements in array must be of int data type")
-
-        if iter_values is not None:
-            for item in iter_values:
-                pass
-                # self.insert(item)
+        # if iter_values is not None:
+        #     for item in iter_values:
+        #         pass
+        #         # self.insert(item)
 
     def __len__(self) -> int:
         return self.size
@@ -49,9 +44,42 @@ class DoublyLinkedList:
         # return True if no differences are found
         return True
 
+    def show_node_list(self):
+        current = self.head
+        while current is not None:
+            print(f'{current.val}', end=' -> ')
+            current = current.next
+        print(f'{None}', end='')
+
+    def is_empty(self):
+        return self.head is None and self.tail is None
+
     @staticmethod
     def _link(first, second):
         if first:
             first.next = second
         if second:
             second.prev = first
+
+    def insert_front(self, value):
+        """Insert a new node with the given value at the front of the list."""
+        new_node = Node(value)
+        # connect the new node with the head
+        self._link(new_node, self.head)
+        self.head = new_node  # update the head pointer
+        if self.size == 0:  # if the list was empty before
+            self.tail = new_node  # update the tail pointer
+        self.size += 1  # increment the size
+
+    def insert_end(self, value):
+        new_node = Node(value)
+
+        if self.is_empty():
+            self.head = new_node
+            self.tail = new_node
+            self.size += 1
+            return
+
+        self._link(self.tail, new_node)
+        self.tail = new_node
+        self.size += 1
