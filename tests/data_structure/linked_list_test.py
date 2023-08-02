@@ -1695,6 +1695,19 @@ class TestLinkedList(TestCase):
         self.assertEqual(self.list.tail.val, 1000000)
         self.assertEqual(self.list.size, 6)  # check if the size is updated
 
+    def test_insert_sorted_and_check_the_tail(self):
+        arr = [3, 2, 4, 5, 1]
+        self.list = LinkedList()
+
+        for i, item in enumerate(arr):
+            self.list.insert_sorted(item)
+
+        self.list.insert_sorted(10)  # insert a large value
+
+        # check if the value is inserted as the tail
+        self.assertEqual(self.list.tail.val, 10)
+        self.assertEqual(self.list.size, 6)  # check if the size is updated
+
     # define a method that tests the insert_sorted method with a negative value
     def test_insert_sorted_negative(self):
         with self.assertRaises(ValueError):

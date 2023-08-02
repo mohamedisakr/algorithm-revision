@@ -432,6 +432,9 @@ class LinkedList:
         # self.tail = prev
 
     def delete_even_positions(self):
+        # if self.is_empty or self.size == 1:
+        #     return
+
         previous = None
         current = self.head
         cur_value = 0
