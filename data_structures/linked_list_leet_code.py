@@ -1,3 +1,6 @@
+# https://leetcode.com/problems/design-linked-list/
+
+
 """Design your implementation of the linked list. 
 You can choose to use a singly or doubly linked list.
 A node in a singly linked list should have two attributes: val and next. 
@@ -8,12 +11,6 @@ prev to indicate the previous node in the linked list.
 Assume all nodes in the linked list are 0-indexed.
 """
 
-
-# class Node:
-#     def __init__(self, val, prev=None, next=None):
-#         self.val = val
-#         self.prev = prev
-#         self.next = next
 
 class Node:
     slots = ('val', 'prev', 'next')
@@ -142,7 +139,8 @@ class MyLinkedList:
 
         # link the previous and next nodes with the new node
         prev_node.next = new_node
-        next_node.prev = new_node
+        if next_node.prev is not None:
+            next_node.prev = new_node
 
         # increment the size of the linked list
         self.size += 1
@@ -151,7 +149,53 @@ class MyLinkedList:
         """ Delete the indexth node in the linked list, if the index is valid.
         Assume all nodes in the linked list are 0-indexed.
         """
-        pass
+        if self.head is None:
+            return
+
+        # if the index is negative or greater than the length, do nothing
+        if index < 0 or index > self.size-1:
+            return
+
+        # if the index is zero, insert at the head
+        if index == 0:
+            self.head = self.head.next
+            if self.head.prev:
+                self.head.prev = None
+            self.size -= 1
+            if self.size == 1:
+                self.tail = self.head
+            return
+
+        # if the index is equal to the length, insert at the tail
+        if index == self.size:  # changed from index == self.size-1
+            # self.tail = self.tail.prev
+            if self.tail.prev is not None:
+                self.tail = self.tail.prev
+
+            self.tail.next = None
+            self.size -= 1
+            if self.size == 1:
+                self.head = self.tail
+            return
+
+        # otherwise, delete in between two existing nodes
+        # find the node before the index
+        prev_node = self.head
+        for _ in range(index - 1):
+            prev_node = prev_node.next
+
+        # find the node after the index
+        # next_node = prev_node.next
+        next_node = prev_node.next.next
+
+        # link the previous and next nodes with the new node
+        prev_node.next = next_node
+        # next_node.prev = prev_node
+        if next_node is not None:
+            next_node.prev = prev_node
+
+        # increment the size of the linked list
+        self.size -= 1
 
 
 # Your MyLinkedList object will be instantiated and called as such:

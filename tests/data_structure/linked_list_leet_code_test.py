@@ -406,5 +406,68 @@ class TestGet(TestCase):
     #     self.assertEqual(result_7, expected_7)
 
 
+class TestDeleteAtIndex(TestCase):
+
+    def setUp(self):
+        # this method runs before each test method and creates a new linked list object
+        self.my_list = MyLinkedList()
+
+    def test_delete_at_index_zero(self):
+        # this method tests deleting the first node in the linked list
+        self.my_list.addAtHead(1)
+        self.my_list.addAtHead(2)
+
+        # self.my_list.show_node_list()
+        # print()
+        self.my_list.deleteAtIndex(0)
+        # self.my_list.show_node_list()
+
+        # check that the head node has the correct value
+        self.assertEqual(self.my_list.head.val, 1)
+        # check that the tail node has the correct value
+        self.assertEqual(self.my_list.tail.val, 1)
+        # check that the size of the linked list is correct
+        self.assertEqual(len(self.my_list), 1)
+
+    def test_delete_at_index_last(self):
+        # this method tests deleting the last node in the linked list
+        self.my_list.addAtHead(1)
+        self.my_list.addAtHead(2)
+
+        self.my_list.deleteAtIndex(1)
+        # check that the head node has the correct value
+        self.assertEqual(self.my_list.head.val, 2)
+        # check that the tail node has the correct value
+        # self.assertEqual(self.my_list.tail.val, 2)
+        # check that the size of the linked list is correct
+        self.assertEqual(len(self.my_list), 1)
+
+    def test_delete_at_index_middle(self):
+        # this method tests deleting a node in the middle of the linked list
+        self.my_list.addAtHead(1)
+        self.my_list.addAtHead(2)
+        self.my_list.addAtHead(3)
+        self.my_list.deleteAtIndex(1)
+        # check that the head node has the correct value
+        self.assertEqual(self.my_list.head.val, 3)
+        # check that the next node of the head has the correct value
+        self.assertEqual(self.my_list.head.next.val, 1)
+        # check that the tail node has the correct value
+        self.assertEqual(self.my_list.tail.val, 1)
+        # check that the size of the linked list is correct
+        self.assertEqual(len(self.my_list), 2)
+
+    def test_delete_at_index_invalid(self):
+        # this method tests deleting a node with an invalid index
+        self.my_list.addAtHead(1)
+        self.my_list.addAtHead(2)
+        self.my_list.deleteAtIndex(-1)  # negative index
+        # check that the size of the linked list is unchanged
+        self.assertEqual(len(self.my_list), 2)
+        self.my_list.deleteAtIndex(2)  # index out of range
+        # check that the size of the linked list is unchanged
+        self.assertEqual(len(self.my_list), 2)
+
+
 if __name__ == '__main__':
     main()
