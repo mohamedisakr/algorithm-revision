@@ -136,5 +136,168 @@ class TestAddAtHead(TestCase):
     #         self.linked_list.addAtHead(1 + 2j)
 
 
+class TestAddAtTail(TestCase):
+    def setUp(self):
+        # this method runs before each test case and creates a new linked list object
+        self.my_list = MyLinkedList()
+
+    def test_add_at_tail_empty_list(self):
+        # this method tests adding a node to an empty list
+        self.my_list.addAtTail(10)  # add a node with value 10
+        # check that the size of the list is 1
+        self.assertEqual(len(self.my_list), 1)
+        # check that the head node has value 10
+        self.assertEqual(self.my_list.head.val, 10)
+        # check that the tail node has value 10
+        self.assertEqual(self.my_list.tail.val, 10)
+        # check that the head node has no previous node
+        self.assertIsNone(self.my_list.head.prev)
+        # check that the tail node has no next node
+        self.assertIsNone(self.my_list.tail.next)
+
+    def test_add_at_tail_non_empty_list(self):
+        # this method tests adding a node to a non-empty list
+        self.my_list.addAtTail(10)  # add a node with value 10
+        self.my_list.addAtTail(20)  # add another node with value 20
+
+        # check that the size of the list is 2
+        self.assertEqual(len(self.my_list), 2)
+
+        # check that the head node has value 10
+        self.assertEqual(self.my_list.head.val, 10)
+        # check that the tail node has value 20
+        self.assertEqual(self.my_list.tail.val, 20)
+
+        # check that the head node has no previous node
+        self.assertIsNone(self.my_list.head.prev)
+        # check that the tail node has no next node
+        self.assertIsNone(self.my_list.tail.next)
+
+        # check that the next node of the head has value 20
+        self.assertEqual(self.my_list.head.next.val, 20)
+        # check that the previous node of the tail has value 10
+        self.assertEqual(self.my_list.tail.prev.val, 10)
+
+    def test_add_at_tail_negative_value(self):
+        # this method tests adding a node with a negative value
+        self.my_list.addAtTail(-10)  # add a node with value -10
+        # check that the size of the list is 1
+        self.assertEqual(len(self.my_list), 1)
+        # check that the head node has value -10
+        self.assertEqual(self.my_list.head.val, -10)
+        # check that the tail node has value -10
+        self.assertEqual(self.my_list.tail.val, -10)
+        # check that the head node has no previous node
+        self.assertIsNone(self.my_list.head.prev)
+        # check that the tail node has no next node
+        self.assertIsNone(self.my_list.tail.next)
+
+    def test_add_at_tail_zero_value(self):
+        # this method tests adding a node with a zero value
+        self.my_list.addAtTail(0)  # add a node with value 0
+        # check that the size of the list is 1
+        self.assertEqual(len(self.my_list), 1)
+        # check that the head node has value 0
+        self.assertEqual(self.my_list.head.val, 0)
+        # check that the tail node has value 0
+        self.assertEqual(self.my_list.tail.val, 0)
+        # check that the head node has no previous node
+        self.assertIsNone(self.my_list.head.prev)
+        # check that the tail node has no next node
+        self.assertIsNone(self.my_list.tail.next)
+
+    def test_add_at_tail_none_value(self):
+        # this method tests adding a node with a None value
+        self.my_list.addAtTail(None)  # add a node with value None
+        # check that the size of the list is 1
+        self.assertEqual(len(self.my_list), 1)
+        # check that the head node has value None
+        self.assertIsNone(self.my_list.head.val)
+        # check that the tail node has value None
+        self.assertIsNone(self.my_list.tail.val)
+        # check that the head node has no previous node
+        self.assertIsNone(self.my_list.head.prev)
+        # check that the tail node has no next node
+        self.assertIsNone(self.my_list.tail.next)
+
+    def test_add_at_tail_one_node_list(self):
+        # this method tests adding a node to a list that has only one node
+        self.my_list.addAtTail(10)  # add a node with value 10
+        self.my_list.addAtTail(20)  # add another node with value 20
+        # check that the size of the list is 2
+        self.assertEqual(len(self.my_list), 2)
+        # check that the head node has value 10
+        self.assertEqual(self.my_list.head.val, 10)
+        # check that the tail node has value 20
+        self.assertEqual(self.my_list.tail.val, 20)
+        # check that the head node has no previous node
+        self.assertIsNone(self.my_list.head.prev)
+        # check that the tail node has no next node
+        self.assertIsNone(self.my_list.tail.next)
+        # check that the next node of the head has value 20
+        self.assertEqual(self.my_list.head.next.val, 20)
+        # check that the previous node of the tail has value 10
+        self.assertEqual(self.my_list.tail.prev.val, 10)
+
+    def tearDown(self):
+        # this method runs after each test case and deletes the linked list object
+        del self.my_list
+
+
+# Define a test class that inherits from unittest.TestCase
+class TestAddAtIndex(TestCase):
+
+    # Write a test method that starts with test_
+    def test_add_at_index_success(self):
+        # Create an instance of MyLinkedList
+        my_list = MyLinkedList()
+
+        # Add some nodes to the list
+        my_list.addAtHead(1)
+        my_list.addAtTail(3)
+
+        # Add a node at index 1 with value 2
+        my_list.addAtIndex(1, 2)
+
+        # Get the values of the nodes in the list
+        values = []
+        current = my_list.head
+        while current:
+            values.append(current.val)
+            current = current.next
+        # Check that the values match the expected result
+        self.assertEqual(values, [1, 2, 3], "Should be [1, 2, 3]")
+
+    # Write test methods that start with test_
+    def test_add_at_index_success_1(self):
+        # Create an instance of MyLinkedList and add some nodes
+        my_list = MyLinkedList()
+        my_list.addAtHead(1)
+        my_list.addAtTail(3)
+
+        # Call the addAtIndex function with a valid index and value
+        my_list.addAtIndex(1, 2)
+
+        # Check that the linked list has the expected values and size
+        self.assertEqual(my_list.head.val, 1)
+        self.assertEqual(my_list.head.next.val, 2)
+        self.assertEqual(my_list.tail.val, 3)
+        self.assertEqual(len(my_list), 3)
+
+    def test_add_at_index_invalid(self):
+        # Create an instance of MyLinkedList and add some nodes
+        my_list = MyLinkedList()
+        my_list.addAtHead(1)
+        my_list.addAtTail(3)
+
+        # Call the addAtIndex function with an invalid index and value
+        my_list.addAtIndex(5, 4)
+
+        # Check that the linked list has not changed
+        self.assertEqual(my_list.head.val, 1)
+        self.assertEqual(my_list.tail.val, 3)
+        self.assertEqual(len(my_list), 2)
+
+
 if __name__ == '__main__':
     main()
