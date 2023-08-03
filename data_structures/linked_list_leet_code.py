@@ -87,7 +87,27 @@ class MyLinkedList:
         If the index is invalid, return -1
         Assume all nodes in the linked list are 0-indexed.
         """
-        pass
+        # if the index is negative or greater than the length, do nothing
+        if self.head is None:
+            return -1
+
+        if index < 0 or index > self.size-1:
+            return -1
+
+        # if the index is zero, insert at the head
+        if index == 0:
+            return self.head.val
+
+        # if the index is equal to the length, insert at the tail
+        if index == self.size:  # changed from index == self.size-1
+            return self.tail.val
+
+        # find the node before the index
+        prev_node = self.head
+        for _ in range(index):  # - 1
+            prev_node = prev_node.next
+
+        return prev_node.val
 
     def addAtIndex(self, index: int, val: int) -> None:
         # if the index is negative or greater than the length, do nothing
@@ -126,111 +146,6 @@ class MyLinkedList:
 
         # increment the size of the linked list
         self.size += 1
-
-    '''
-    def addAtIndex(self, index: int, val: int) -> None:
-        # if the index is negative or greater than the length, do nothing
-        if index < 0 or index > self.size:
-            return
-
-        # if the index is zero, insert at the head
-        if index == 0:
-            self.addAtHead(val)
-            return
-
-        # if the index is equal to the length, insert at the tail
-        if index == self.size-1:
-            self.addAtTail(val)
-            return
-
-        # create a new node with the given value
-        new_node = Node(val)
-
-        # otherwise, insert between two existing nodes
-        # find the node before the index
-        prev_node = self.head
-        for _ in range(index - 1):
-            prev_node = prev_node.next
-
-        # find the node after the index
-        next_node = prev_node.next
-
-        # link the new node with the previous and next nodes
-        new_node.prev = prev_node
-        new_node.next = next_node
-
-        # link the previous and next nodes with the new node
-        prev_node.next = new_node
-        next_node.prev = new_node
-
-        # increment the size of the linked list
-        self.size += 1
-    '''
-
-    '''
-    def addAtIndex(self, index: int, val: int) -> None:
-        """ Add a node of value val before the index-th node in the linked list. 
-        If index equals the length of the linked list, the node will be appended 
-        to the end of the linked list. 
-
-        If index is greater than the length, the node will not be inserted.
-        Assume all nodes in the linked list are 0-indexed.
-
-        myLinkedList = new MyLinkedList()
-        myLinkedList.addAtHead(1)
-        myLinkedList.addAtTail(3)
-        >> linked list becomes 1 -> 2 -> 3
-
-        myLinkedList.addAtIndex(1, 2)    
-        >> linked list becomes 1 -> 2 -> 3
-        """
-        if index > self.size-1:
-            return
-
-        if index == self.size-1:
-            self.addAtTail(val)
-            return
-
-        new_node = Node(val)
-        current = self.head
-
-        # find the correct position for the new node
-        idx = 0
-        while current:
-            if index == idx:  # current.val > new_node.val:
-                break  # found the position
-            idx += 1
-            current = current.next
-
-        # insert the new node between previous and current
-        new_node.next = current
-
-        if current.prev is None:  # inserted at the beginning
-            self.head = new_node
-        else:
-            current.prev.next = new_node
-
-        # update the tail and size attributes
-        if current is None:  # inserted at the end
-            self.tail = new_node
-        self.size += 1
-
-        # current = self.head
-
-        # for i in range(self.size):
-        #     if i == index:
-        #         print(f'index : {i}')
-        #         break
-        #     current = current.next
-
-        # new_node = Node(val)
-
-        # new_node.prev = current
-        # new_node.next = current.next
-        # current.next.prev = new_node
-
-        # self.size += 1
-    '''
 
     def deleteAtIndex(self, index: int) -> None:
         """ Delete the indexth node in the linked list, if the index is valid.

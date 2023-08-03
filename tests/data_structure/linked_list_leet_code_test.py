@@ -299,5 +299,112 @@ class TestAddAtIndex(TestCase):
         self.assertEqual(len(my_list), 2)
 
 
+# define a test class that inherits from unittest.TestCase
+class TestGet(TestCase):
+
+    # define a setUp method that runs before each test
+    def setUp(self):
+        # create a linked list with some values
+        self.linked_list = MyLinkedList()
+        self.linked_list.addAtHead(5)
+        self.linked_list.addAtHead(4)
+        self.linked_list.addAtHead(3)
+        self.linked_list.addAtHead(2)
+        self.linked_list.addAtHead(1)
+
+    # write a test method that checks the get function with an invalid index
+
+    def test_get_invalid_index(self):
+        # call the get function with index 10 and store the result
+        result = self.linked_list.get(10)
+        # check that the result is equal to -1 using self.assertEqual
+        self.assertEqual(result, -1)
+
+   # write a test method that checks the get function with a valid index
+    def test_get_valid_index(self):
+        # call the get function with index 2 and store the result
+        result = self.linked_list.get(2)
+        # check that the result is equal to 3 using self.assertEqual
+        self.assertEqual(result, 3)
+
+    # write a test method that checks the get function with an empty linked list
+    def test_get_empty_list(self):
+        # create an empty linked list
+        self.linked_list = MyLinkedList()
+        # call the get function with index 0 and store the result
+        result = self.linked_list.get(0)
+        # check that the result is equal to -1 using self.assertEqual
+        self.assertEqual(result, -1)
+
+    # write a test method that checks the get function with a negative index
+    def test_get_negative_index(self):
+        # call the get function with index -1 and store the result
+        result = self.linked_list.get(-1)
+        # check that the result is equal to -1 using self.assertEqual
+        self.assertEqual(result, -1)
+
+    # write a test method that checks the get function with an index equal to the length of the linked list
+    def test_get_index_equal_length(self):
+        # call the get function with index 5 and store the result
+        result = self.linked_list.get(5)
+        # check that the result is equal to -1 using self.assertEqual
+        self.assertEqual(result, -1)
+
+    # write a test method that checks the get function with the first index of the linked list
+    def test_get_first_index(self):
+        # call the get function with index 0 and store the result
+        result = self.linked_list.get(0)
+        # check that the result is equal to 1 using self.assertEqual
+        self.assertEqual(result, 1)
+
+    # write a test method that checks the get function with the last index of the linked list
+    def test_get_last_index(self):
+        # call the get function with index 4 and store the result
+        result = self.linked_list.get(4)
+        # check that the result is equal to 5 using self.assertEqual
+        self.assertEqual(result, 5)
+
+    # # write a test method that checks the get function with a circular linked
+    # # list
+    # def test_get_circular_list(self):
+    #     # create a circular linked list with some values
+    #     self.linked_list = MyLinkedList()
+    #     self.linked_list.addAtHead(5)
+    #     self.linked_list.addAtHead(4)
+    #     self.linked_list.addAtHead(3)
+    #     self.linked_list.addAtHead(2)
+    #     self.linked_list.addAtHead(1)
+
+    #     # call the get function with different indexes and store the results
+    #     result_0 = self.linked_list.get(0)
+    #     result_1 = self.linked_list.get(1)
+    #     result_2 = self.linked_list.get(2)
+    #     result_3 = self.linked_list.get(3)
+    #     result_4 = self.linked_list.get(4)
+    #     result_5 = self.linked_list.get(5)
+    #     result_6 = self.linked_list.get(6)
+    #     result_7 = self.linked_list.get(7)
+
+    #     # calculate the expected values using modulo arithmetic
+    #     expected_0 = 1 % 5  # 1
+    #     expected_1 = 2 % 5  # 2
+    #     expected_2 = 3 % 5  # 3
+    #     expected_3 = 4 % 5  # 4
+    #     expected_4 = 5 % 5  # 0 (or 5)
+    #     expected_5 = 6 % 5  # 1
+    #     expected_6 = 7 % 5  # 2
+    #     expected_7 = 8 % 5  # 3
+
+    #     # check that the results are equal to the expected values using self.assertEqual
+    #     self.assertEqual(result_0, expected_0)
+    #     self.assertEqual(result_1, expected_1)
+    #     self.assertEqual(result_2, expected_2)
+    #     self.assertEqual(result_3, expected_3)
+    #     self.assertEqual(result_4, expected_4)
+    #     self.assertEqual(result_5, expected_5)
+    #     self.assertEqual(result_6, expected_6)
+    #     self.assertEqual(result_7, expected_7)
+
+
 if __name__ == '__main__':
     main()
